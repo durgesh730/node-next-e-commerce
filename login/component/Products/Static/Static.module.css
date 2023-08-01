@@ -1,0 +1,98 @@
+.chooseItems{
+    position:relative;
+    text-align: center;
+    font-size: 2rem;
+    top: 11rem;
+}
+
+.StatImg{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+    text-align: center;
+}
+
+.imageStatic{
+    text-align: center;
+    margin: auto;
+    width: 80%;
+    height: 60%;
+    cursor: pointer;
+}
+
+
+.imglandingPage {
+    background-image: url("../../../image/Untitled design (3).png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 7rem;
+    position: relative;
+    width: 100%;
+    height: 80%;
+
+}
+
+.imglandingPageText {
+    float: right;
+    padding-right: 7rem;
+    padding-top: 8rem;
+}
+
+.landingPageTextheading {
+    color: white;
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 4rem;
+}
+
+.landingPageTextsmall {
+    color: white;
+}
+
+.someIcons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    line-height: 2rem;
+}
+
+.IconsBrd {
+    border: 1px solid white;
+    border-radius: 50%;
+    padding: .2rem;
+    font-size: 1.7rem;
+    margin-right: .3rem;
+    margin-left: .3rem;
+}
+
+.landingbtn {
+    padding-top: 1rem;
+}
+
+.landingbtn button {
+    background-color: white;
+    padding: .6rem 2rem;
+    border-radius: 4px;
+    color: #E07575;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.socialsIcons {
+    padding-top: 4rem;
+    color: white;
+    font-size: 2rem;
+    align-items: center;
+    float: right;
+}
+
+.Shopify {
+    position: absolute;
+    margin: auto;
+    bottom: 4rem;
+    left: 40%;
+    color: white;
+    font-size: 1.4rem;
+}

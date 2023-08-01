@@ -1,0 +1,157 @@
+.login {
+    position: relative;
+    top: 6rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 5rem;
+    margin-bottom: 14rem;
+    transition: all .3s;
+}
+
+.loginimg {
+    color: white;
+    padding: 5rem 2rem;
+    background-color: #E07575;
+    text-align: center;
+}
+
+.loginimg h2 {
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.form_data {
+    width: 28rem;
+    padding: 60px 30px;
+    box-shadow: 0 0 15px -10px #232354;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form_heading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form_data h1 {
+    font-size: 34px;
+    color: #232354;
+}
+
+.form_data p {
+    color: #718096;
+    font-size: 15px;
+    padding-top: 0px;
+}
+
+.form_data p a {
+    font-size: 18px;
+}
+
+.form_data form {
+    margin-top: 10px;
+    width: 90%;
+}
+
+.form_input input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d4d0d0;
+    border-radius: 5px;
+    outline: none;
+    margin-bottom: 14px;
+    margin-top: 9px;
+    font-size: 14px;
+}
+
+.form_input label {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.two {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.form_input input:focus {
+    border: 2px solid rgba(66, 153, 225, 0.6);
+}
+
+
+.form_input input::placeholder {
+    color: #8694a8;
+    letter-spacing: .5px;
+    font-size: 14px;
+}
+
+.showpass {
+    position: absolute;
+    right: 0;
+    top: 1px;
+    padding: 7px 10px;
+    margin-right: 5px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #E07575;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: #E07575;
+    color: #fff;
+    font-size: 22px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+.btn:hover {
+    background-color: #E07575;
+}
+
+.form_data form p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.form_data form a {
+    text-decoration: none;
+    color: #718096;
+    border-bottom: 2px solid #8694a8;
+}
+
+@media screen and (max-width:1200px) {
+    .loginimg img {
+        width: 26rem;
+    }
+
+    .loginimg {
+        padding-top: 2rem;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    .loginimg {
+        display: none;
+    }
+}
+
+@media screen and (max-width:400px) {
+    .form_data p {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,64 @@
+.filter {
+    box-shadow: 0px 0px 10px -7px black;
+    height: 28rem;
+    width: 100%;
+    padding: 3rem 2rem;
+}
+
+.filterOptions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+.pricefilter {
+    padding-top: 1rem;
+}
+
+.minmax {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pricecheck {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+}
+
+.brandfilter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.filterdiscount {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.select {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0.5em 2em 0.5em 0.5em;
+    border: 1px solid #343434;
+    font: inherit;
+    line-height: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: right 15px top 1em, right 10px top 1em;
+    background-size: 5px 5px, 5px 5px;
+}
+
+.headstext {
+    padding-top: 1rem;
+}
+
+.clearAll {
+    color: #E07575;
+    cursor: pointer;
+}

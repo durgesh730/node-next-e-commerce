@@ -1,0 +1,19 @@
+.filterProducts {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.ItemsProducts {
+    margin: auto;
+    width: 80%;
+}
+
+.filter {
+    display: flex;
+    justify-content: center;
+    float: left;
+    width: 20%;
+    position: relative;
+    top: 11rem;
+}

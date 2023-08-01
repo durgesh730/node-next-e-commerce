@@ -1,0 +1,60 @@
+.items{
+    position:relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    top: 10rem;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 4rem;
+}
+
+.ItemsCard{
+    margin: auto;
+    width: 95%;
+    padding: 1rem 1rem;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 6px;
+}
+
+.ItemImg{
+    width: 12rem;
+    margin: auto;
+}
+
+.delivery{
+    font-size: 12px;
+}
+
+.ImgDetails{
+    padding-left: 2.5rem;
+    padding-top: .5rem;
+    width: 90%;
+}
+
+.price span{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.rating{
+   display: flex;
+   flex-direction: row;
+   gap: .5rem;
+   align-items: center;
+   padding-top: 0.4rem;
+}
+
+.rating span{
+    background-color: #E07575;
+    padding: .3rem 0.5rem;
+    border-radius: 45%;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.ItemsCard:hover{  
+    box-shadow: 0px 0px 10px -7px black;
+    /* border: 1px solid #E07575; */
+}

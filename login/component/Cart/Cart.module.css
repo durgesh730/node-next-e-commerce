@@ -1,0 +1,111 @@
+.cart {
+    position: relative;
+    display: flex;
+    padding-top: 12rem;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6rem;
+    padding-bottom: 6rem;
+}
+
+.productanddetails {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.cartImg {
+    width: 12%;
+}
+
+.someCartbtn {
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.CartItems {
+    border: 2px solid rgb(232, 232, 232);
+    border-radius: 4px;
+}
+
+.Incbtn {
+    padding: .2rem .7rem;
+    margin: .5rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgb(210, 209, 209);
+    font-weight: 600;
+}
+
+.Decbtn {
+    padding: .2rem .6rem;
+    margin: .5rem;
+    font-size: 1rem;
+    border-radius: 50%;
+    border: 1px solid rgb(210, 209, 209);
+}
+
+.someCartbtn span {
+    padding: 0rem .8rem;
+    font-size: 1.1rem;
+    border: 1px solid rgb(210, 209, 209);
+}
+
+.removebtn {
+    font-weight: 600;
+}
+
+.exactPrice {
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding-top: .5rem;
+    align-items: center;
+}
+
+.discoutdetails {
+    color: #E07575;
+    padding-left: 1rem;
+    font-size: 1rem;
+}
+
+.sizecart {
+    color: rgb(154, 152, 152);
+}
+
+.title {
+    font-size: 1.2rem;
+}
+
+.buybothbtn {
+    position: relative;
+}
+
+.backtoshopbtn {
+    background-color: #E07575;
+    font-size: 1rem;
+}
+
+.backtoshopbtn:hover {
+    background-color: #E07575;
+}
+
+.buybtn {
+    background-color: #E07575;
+    font-size: 1rem;
+}
+
+.buybtn:hover {
+    background-color: #E07575;
+}
+
+.buybothbtn{
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

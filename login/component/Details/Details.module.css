@@ -1,0 +1,157 @@
+.Details {
+    position: relative;
+    top: 10rem;
+    padding-bottom: 6rem;
+}
+
+.onlyImgs{
+    width: 40%;
+}
+
+.Imgdetails{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.Imgs {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.BigestImg{
+    width: 50%;
+    cursor: pointer;
+}
+
+.SmallImg{
+    width: 14%;
+    padding-right: 1rem;
+}
+
+.buttonImg{
+    cursor: pointer;
+}
+
+.SmallSingle{
+    padding-bottom: .5rem;
+    cursor: pointer;
+}
+
+.brandName {
+    font-size: 1.1rem;
+}
+
+.title{
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+}
+
+.exactPrice{
+    font-size: 1.7rem;
+    font-weight: 600;
+    padding-top: .5rem;
+    align-items: center;
+}
+
+.rating{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+ }
+ 
+ .ratingdetails{
+    color: rgb(135, 135, 135);
+ }
+
+ .rating span{
+     background-color: #E07575;
+     padding: .3rem 0.5rem;
+     border-radius: 45%;
+     color: white;
+     display: flex;
+     align-items: center;
+     font-size: 1.1rem;
+ }
+
+ .rating small{
+    font-size: 1rem;
+ }
+
+ .small{
+    font-size: 1rem;
+    font-weight: 600;
+    border: 2px solid rgb(238, 237, 237);
+    padding: 0.2rem 0.7rem;
+    height: 1rem;
+    margin: .5rem;
+    cursor: pointer;
+ }
+
+ .size{
+    display: flex;
+    padding-top: 1rem;
+    flex-direction: row;
+    gap: 4rem;
+ }
+
+ .Sizeheading{
+    color: rgb(152, 152, 152);
+    font-size: 1.1rem;
+ }
+
+ .brandName{
+    color: rgb(152, 152, 152);
+ }
+
+ .Cartbtnboth{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+    padding-right: 0%;
+ }
+
+ .crtbtn{
+    background-color: #E07575;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: .5rem 2.5rem;
+ }
+
+ .buybtn{
+    background-color: #E07575;
+    color: white;
+    font-size: 1.1rem;
+    padding: .5rem 3.2rem;
+    font-weight: 600;
+ }
+
+ .discoutdetails{
+    color: #E07575;
+    padding-left: 1rem;
+    font-size: 1rem;
+ }
+
+ .productDetails{
+    padding-top: 1rem;
+ }
+
+ .productDetails h4{
+    font-size: 1.3rem;
+    padding-left: .8rem;
+    font-weight: 600;
+ }
+
+ .Indetials{
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    gap: 25%;
+    padding-top: .5rem;
+    font-size: 1.1rem;
+ }
