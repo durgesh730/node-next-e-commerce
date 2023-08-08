@@ -9,7 +9,7 @@ import (
 // JWT secret key to sign the tokens
 var JwtScret = []byte("durgeshchaudhary")
 
-func GererateToken(userId interface{}) (string, error) {
+func GererateToken(userId string) (string, error) {
 	// create token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"userId": userId,
@@ -21,6 +21,5 @@ func GererateToken(userId interface{}) (string, error) {
 	if err != nil {
 		return "", err
 	}
-
 	return tokenString, nil
 }

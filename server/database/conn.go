@@ -10,6 +10,8 @@ import (
 )
 
 var SaveData *mongo.Collection
+var Productdata *mongo.Collection
+var Cartdata *mongo.Collection
 
 func ConnectDB() error {
 	 db :=  os.Getenv("DB")
@@ -19,8 +21,11 @@ func ConnectDB() error {
 	if err != nil {
 		return err
 	}
+
 	fmt.Println("Database connected")
-	SaveData = client.Database("Next").Collection("e-commerce")
+	SaveData = client.Database("Next").Collection("user")
+	Productdata = client.Database("Next").Collection("product")
+	Cartdata = client.Database("Next").Collection("cart")
 
 	return nil
 }

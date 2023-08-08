@@ -17,15 +17,14 @@ export const registerFailure = (error) => ({
 });
 
 
-export const register = (email, password) => {
+export const register = (logg) => {
   return (dispatch) => {
     dispatch(registerRequest());
 
-    return axios.post(`${url}/user/signup`, { email, password })
+    return axios.post(`${url}/user/signup`, { email: logg.email, password: logg.password })
       .then(
         (response) => {
           const userInfo = response?.data;
-          console.log(userInfo)
           dispatch(registerSuccess(userInfo));
         },
         (error) => {
@@ -35,3 +34,35 @@ export const register = (email, password) => {
       );
   };
 };
+
+
+export const loginRequest = () => ({
+  type: types.LOGIN_REQUEST,
+})
+export const loginSuccess = (userInfo) => ({
+  type: types.LOGIN_SUCCESS,
+  payload: userInfo
+})
+export const loginFailure = (error) => ({
+  type: types.LOGIN_REQUEST,
+  payload: error,
+})
+
+export const userlogin = (logg) => {
+  return (dispatch) => {
+    dispatch(loginRequest);
+
+    return axios.post(`${url}/user/login`, { email: logg.email, password: logg.password })
+      .then(
+        (response) => {
+          const userInfo = response.data
+          console.log(userInfo, "user")
+          dispatch(loginSuccess(userInfo));
+        },
+        (error) => {
+          const errorMsg = error.response?.data;
+          dispatch(loginFailure(errorMsg));
+        }
+      )
+  }
+}

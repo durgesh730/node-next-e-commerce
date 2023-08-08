@@ -20,23 +20,21 @@
     cursor: pointer;
 }
 
-
-.imglandingPage {
-    background-image: url("../../../image/Untitled design (3).png");
+.imglandingPageText {
+    background-image: url("../../../image/Untitled\ design\ \(3\).png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     top: 7rem;
     position: relative;
     width: 100%;
-    height: 80%;
-
-}
-
-.imglandingPageText {
-    float: right;
-    padding-right: 7rem;
-    padding-top: 8rem;
+    height: 150%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right:10%;
+    padding-top: 11%;
+    padding-bottom: 5%;
+    background-color: #E07575;
 }
 
 .landingPageTextheading {
