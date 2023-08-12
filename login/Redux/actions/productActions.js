@@ -3,12 +3,12 @@ import * as types from '../constants/productConstant';
 import { url } from '@/host';
 
 export const fetchProductsBegin = () => ({
-    type:types.FETCH_PRODUCTS_BEGIN
+    type: types.FETCH_PRODUCTS_BEGIN
 });
 
 export const fetchProductsSuccess = (products) => ({
     type: types.FETCH_PRODUCTS_SUCCESS,
-    payload:products
+    payload: products
 });
 
 export const fetchProductsFailure = (error) => ({
@@ -26,4 +26,26 @@ export function fetchProducts() {
             })
             .catch(error => dispatch(fetchProductsFailure(error)));
     };
+}
+
+
+export const fetchQueryProductsSuccess = (products) => ({
+    type: types.FETCH_QUERY_PRODUCTS_SUCCESS,
+    payload: products
+});
+
+export function fetchQueryProducts(query) {
+    console.log(query, "redux")
+    return (dispatch) => {
+        dispatch(fetchProductsBegin());
+        return axios.get(`${url}/getQueryproduct?q=${query}`)
+            .then((res) => {
+                console.log(res.data)
+                dispatch(fetchQueryProductsSuccess(res.data));
+                return res.data;
+            })
+            .catch((error) => {
+                dispatch(fetchProductsFailure(error));
+            })
+    }
 }

@@ -3,7 +3,8 @@ import * as types from '../constants/productConstant';
 const initialState = {
     items: [],
     loading: false,
-    error: null
+    error: null,
+    queryItems: []
 };
 
 export default function productReducer(state = initialState, action) {
@@ -29,6 +30,13 @@ export default function productReducer(state = initialState, action) {
                 error: action.payload,
                 items: []
             };
+
+        case types.FETCH_QUERY_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                queryItems: action.payload
+            }
 
         default:
             return state;

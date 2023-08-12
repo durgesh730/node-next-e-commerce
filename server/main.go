@@ -7,18 +7,10 @@ import (
 
 	"github.com/durgesh730/authenticationInGo/database"
 	"github.com/durgesh730/authenticationInGo/router"
-	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 )
 
 func main() {
-	// env
-	errr := godotenv.Load()
-	if errr != nil {
-		fmt.Println("Error connecting to mongoDB", errr)
-		return
-	}
-
 	// connect database
 	err := database.ConnectDB()
 	if err != nil {

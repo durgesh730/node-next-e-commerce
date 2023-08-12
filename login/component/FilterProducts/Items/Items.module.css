@@ -1,11 +1,9 @@
 .items{
     position:relative;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     top: 10rem;
     width: 90%;
     margin: auto;
-    padding-bottom: 4rem;
+    margin-top: 2rem;
 }
 
 .ItemsCard{
@@ -18,7 +16,7 @@
 }
 
 .ItemImg{
-    width: 12rem;
+    width: 14rem;
     margin: auto;
 }
 
@@ -54,7 +52,6 @@
     align-items: center;
 }
 
-.ItemsCard:hover{  
+.items:hover{  
     box-shadow: 0px 0px 10px -7px black;
-    /* border: 1px solid #E07575; */
 }
