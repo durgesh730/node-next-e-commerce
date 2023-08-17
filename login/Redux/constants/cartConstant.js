@@ -1,0 +1,5 @@
+export const ADD_TO_CART_BEGIN   = 'ADD_TO_CART_BEGIN';
+export const ADD_TO_CART_SUCCESS = 'ADD_TO_CART_SUCCESS';
+export const ADD_TO_CART_FAILURE = 'ADD_TO_CART_FAILURE';
+
+export const FETCH_USER_CART = 'FETCH_USER_CART';

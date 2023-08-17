@@ -21,7 +21,7 @@ const Footer = () => {
                         <a>Flipkart Wholesale</a><br />
                         <a>Corporate Information</a><br />
                     </div>
-                    
+
                     <div className={styles.about} >
                         <h5 href='#about'>Help</h5>
                         <a>Payments</a><br />

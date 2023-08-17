@@ -9,17 +9,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useRouter } from 'next/router'
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import { AddtoCart } from '@/Redux/actions/cartActions';
 
-const Details = () => {
+const Details = ({ product }) => {
   const router = useRouter()
-  const { data } = router.query
+  const dispatch = useDispatch()
+  const selector = useSelector(state=> state.cart)
+  const {loading, error, cart} = selector
 
-  useEffect(()=>{
-    console.log(data, "data")
-  },[data])
-  var product = null;
+  console.log(loading, error, cart, "three of sum")
+
+  const handlecart = (id) => {
+    dispatch(AddtoCart(id))
+    // router.push('/cart')
+  }
 
   return (
     <>
@@ -39,13 +44,13 @@ const Details = () => {
             </div>
 
             <div className={styles.Cartbtnboth} >
-              <button className={styles.crtbtn} >ADD TO CART</button>
+              <button className={styles.crtbtn} onClick={() => handlecart(product.Id)} >ADD TO CART</button>
               <button className={styles.buybtn} >BUY NOW</button>
             </div>
           </div>
 
           <div className={styles.SideDetails} >
-            <div className={styles.brandName} >{product?.Brand}</div>
+            <div className={styles.brandName} >{product?.Brand.toUpperCase()}</div>
 
             <div className={styles.title} >
               <span>{product?.Title}</span>

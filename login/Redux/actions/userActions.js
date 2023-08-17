@@ -56,7 +56,6 @@ export const userlogin = (logg) => {
       .then(
         (response) => {
           const userInfo = response.data
-          console.log(userInfo, "user")
           dispatch(loginSuccess(userInfo));
         },
         (error) => {

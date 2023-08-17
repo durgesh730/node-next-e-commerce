@@ -22,7 +22,6 @@ export function fetchProducts() {
         return axios.get(`${url}/getproduct`)
             .then(response => {
                 dispatch(fetchProductsSuccess(response.data));
-                return response.data;
             })
             .catch(error => dispatch(fetchProductsFailure(error)));
     };
@@ -35,14 +34,29 @@ export const fetchQueryProductsSuccess = (products) => ({
 });
 
 export function fetchQueryProducts(query) {
-    console.log(query, "redux")
     return (dispatch) => {
         dispatch(fetchProductsBegin());
         return axios.get(`${url}/getQueryproduct?q=${query}`)
             .then((res) => {
-                console.log(res.data)
                 dispatch(fetchQueryProductsSuccess(res.data));
-                return res.data;
+            })
+            .catch((error) => {
+                dispatch(fetchProductsFailure(error));
+            })
+    }
+}
+
+export const fetchProductsbyIdSuccess = (products) => ({
+    type: types.FETCH_PRODUCTS_BY_ID_SUCCESS,
+    payload: products
+});
+
+export function fetchProductsById(query) {
+    return (dispatch) => {
+        dispatch(fetchProductsBegin());
+        return axios.get(`${url}/getproductbyId?q=${query}`)
+            .then((res) => {
+                dispatch(fetchProductsbyIdSuccess(res.data));
             })
             .catch((error) => {
                 dispatch(fetchProductsFailure(error));

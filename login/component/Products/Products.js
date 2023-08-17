@@ -19,11 +19,10 @@ const Products = () => {
     return (
         <>
             <Static pic={pic1} heading={"Top Categories to choose from"} />
-
             <div className={styles.ItemsHeading} ><span>Products For You</span></div>
 
             <div className={styles.items} >
-                {items?.map((products, idx) => {
+                {items.reverse()?.map((products, idx) => {
                     return (
                         <>
                             <Items product={products} key={idx} />
@@ -31,10 +30,6 @@ const Products = () => {
                     )
                 })}
             </div>
-
-            {/* <div className={styles.ItemsHeading} > <span>Top Produts For You</span> </div>
-            <Items />
-            <Items /> */}
             <div className={styles.foronlyMergin} ></div>
         </>
     )
