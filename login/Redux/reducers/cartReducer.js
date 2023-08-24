@@ -4,6 +4,7 @@ const initialState = {
     cart: [],
     loading: false,
     error: null,
+    dataCart:[]
 };
 
 export default function CartReducer(state = initialState, action) {
@@ -29,13 +30,14 @@ export default function CartReducer(state = initialState, action) {
                 error: action.payload,
                 cart: []
             };
+
         case types.FETCH_USER_CART:
             return {
                 ...state,
                 loading: false,
-                error: action.payload,
-                cart: []
+                dataCart: action.payload,
             };
+
         default:
             return state;
     }

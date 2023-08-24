@@ -32,9 +32,9 @@ export function AddtoCart(productId) {
     }
 }
 
-export const FetchUserCartSuccess = (products) => ({
+export const FetchUserCartSuccess = (data) => ({
     type: types.FETCH_USER_CART,
-    payload: products
+    payload: data
 });
 
 export function FetchUsercart() {

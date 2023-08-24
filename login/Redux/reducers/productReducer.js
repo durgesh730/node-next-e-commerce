@@ -37,13 +37,15 @@ export default function productReducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 queryItems: action.payload
-            }
+            };
+
         case types.FETCH_PRODUCTS_BY_ID_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 idItems: action.payload
-            }
+            };
+
         default:
             return state;
     }
