@@ -1,11 +1,16 @@
-.cart {
+
+.buttonProducts{
     position: relative;
+    top: 10rem;
     display: flex;
-    padding-top: 12rem;
     flex-direction: row;
     justify-content: center;
     gap: 6rem;
-    padding-bottom: 6rem;
+    padding-bottom: 16rem;
+     
+}
+.cart {
+    padding-bottom: 2rem;
 }
 
 .productanddetails {

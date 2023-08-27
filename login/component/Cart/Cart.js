@@ -1,5 +1,3 @@
-import Image from "next/image"
-import Total from "./Total/Total"
 import styles from './Cart.module.css'
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -10,8 +8,6 @@ const Cart = ({ data }) => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state.products)
   const { loading, error, idItems } = selector
-
-  // console.log(loading, error, idItems, "three of sum")
 
   useEffect(() => {
     dispatch(fetchProductsById(data))
@@ -53,8 +49,7 @@ const Cart = ({ data }) => {
                   </div>
                 </div>
               </>
-            )
-          })}
+              )})}
         </div>
       </div>
     </>
