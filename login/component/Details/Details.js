@@ -12,18 +12,18 @@ import Paper from '@mui/material/Paper';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { AddtoCart } from '@/Redux/actions/cartActions';
+import toast from 'react-hot-toast';
 
 const Details = ({ product }) => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const selector = useSelector(state=> state.cart)
-  const {loading, error, cart} = selector
-
-  console.log(loading, error, cart, "three of sum")
+  const selector = useSelector(state => state.cart)
+  const { loading, error, cart } = selector
 
   const handlecart = (id) => {
     dispatch(AddtoCart(id))
-    // router.push('/cart')
+    toast.success('Added Successfully!')
+    router.push('/cart')
   }
 
   return (
@@ -125,7 +125,6 @@ const Details = ({ product }) => {
                 </Table>
               </TableContainer>
             </div>
-
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchProductsById } from "@/Redux/actions/productActions"
 import CartImg from "./CartImage/CartImg"
 
-const Cart = ({ data }) => {
+const Cart = ({ data, handleDelete }) => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state.products)
   const { loading, error, idItems } = selector
@@ -44,12 +44,13 @@ const Cart = ({ data }) => {
                     </div>
 
                     <div className={styles.removebtn} >
-                      <button>REMOVE </button>
+                      <button onClick={() => { handleDelete(item.Id) }} >REMOVE </button>
                     </div>
                   </div>
                 </div>
               </>
-              )})}
+            )
+          })}
         </div>
       </div>
     </>

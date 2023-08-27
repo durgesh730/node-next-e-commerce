@@ -6,11 +6,18 @@ import { useEffect } from "react"
 import styles from '../component/Cart/Cart.module.css'
 import { useDispatch, useSelector } from "react-redux"
 import { Button } from "@mui/material"
+import { DeleteProductsCarts } from '@/Redux/actions/cartActions'
+import Nodata from "@/component/NoData/Nodata"
 
 const cart = () => {
     const dispatch = useDispatch()
     const selector = useSelector(state => state.cart)
     const { loading, error, dataCart } = selector
+
+    const handleDelete = (id) => {
+        dispatch(DeleteProductsCarts(id));
+        dispatch(FetchUsercart());
+    }
 
     useEffect(() => {
         dispatch(FetchUsercart())
@@ -18,27 +25,30 @@ const cart = () => {
 
     return (
         <>
-            <div className={styles.buttonProducts} >
-                <div className={styles.placeOrder} >
-                    {dataCart?.map((items, ide) => {
-                        return (
-                            <Cart data={items.ProductId} key={ide} />
-                        )
-                    })}
-                    <div className={styles.buybothbtn} >
-                        <Button className={styles.backtoshopbtn} variant="contained">
-                            Back to shop
-                        </Button>
-                        <Button className={styles.buybtn} variant="contained">
-                            place order
-                        </Button>
+            {
+                dataCart === null || dataCart?.length === 0 ? <Nodata /> :
+                    <div className={styles.buttonProducts} >
+                        <div className={styles.placeOrder} >
+                            {dataCart?.map((items, ide) => {
+                                return (
+                                    <Cart data={items.ProductId} key={ide} handleDelete={handleDelete} />
+                                )
+                            })}
+                            <div className={styles.buybothbtn} >
+                                <Button className={styles.backtoshopbtn} variant="contained">
+                                    Back to shop
+                                </Button>
+                                <Button className={styles.buybtn} variant="contained">
+                                    place order
+                                </Button>
+                            </div>
+                        </div>
+                        <div className={styles.sidetotalCom}>
+                            <Total />
+                        </div>
                     </div>
-                </div>
+            }
 
-                <div className={styles.sidetotalCom}>
-                    <Total />
-                </div>
-            </div>
             <Footer />
         </>
     )

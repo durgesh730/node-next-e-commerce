@@ -4,7 +4,8 @@ const initialState = {
     cart: [],
     loading: false,
     error: null,
-    dataCart:[]
+    dataCart: [],
+    deleteProduct: []
 };
 
 export default function CartReducer(state = initialState, action) {
@@ -37,6 +38,13 @@ export default function CartReducer(state = initialState, action) {
                 loading: false,
                 dataCart: action.payload,
             };
+
+        case types.DELETE_PRODUCTS_CART:
+            return {
+                ...state,
+                loading: false,
+                dataCart: state.dataCart.filter(item => item.productId !== action.payload)
+            }
 
         default:
             return state;

@@ -21,7 +21,9 @@ export const register = (logg) => {
   return (dispatch) => {
     dispatch(registerRequest());
 
-    return axios.post(`${url}/user/signup`, { email: logg.email, password: logg.password })
+    return axios.post(`${url}/user/signup`, {
+      email: logg.email, password: logg.password
+    })
       .then(
         (response) => {
           const userInfo = response?.data;
@@ -52,7 +54,9 @@ export const userlogin = (logg) => {
   return (dispatch) => {
     dispatch(loginRequest);
 
-    return axios.post(`${url}/user/login`, { email: logg.email, password: logg.password })
+    return axios.post(`${url}/user/login`, {
+      email: logg.email, password: logg.password
+    })
       .then(
         (response) => {
           const userInfo = response.data

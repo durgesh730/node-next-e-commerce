@@ -55,3 +55,25 @@ export function FetchUsercart() {
 
     }
 }
+
+export const DeletePruductsFromCart = (deleteData) => ({
+    type: types.DELETE_PRODUCTS_CART,
+    payload: deleteData
+})
+
+export function DeleteProductsCarts(id) {
+    return (dispatch) => {
+        dispatch(AddToCartBegin)
+        return axios.delete(`${url}/cart/deleteproducts?q=${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => {
+                dispatch(DeletePruductsFromCart(res.data))
+            })
+            .catch((error) => {
+                dispatch(AddToCartFailure(error))
+            })
+    }
+}
