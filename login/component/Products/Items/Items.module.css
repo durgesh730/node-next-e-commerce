@@ -1,9 +1,8 @@
 .items{
     position:relative;
     top: 10rem;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
     width: 90%;
-    margin: auto;
 }
 
 .ItemsCard{
@@ -24,9 +23,8 @@
 }
 
 .ImgDetails{
-    padding-left: 2.5rem;
+    padding-left: 1rem;
     padding-top: .5rem;
-    width: 95%;
 }
 
 .price span{

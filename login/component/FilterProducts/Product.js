@@ -28,10 +28,11 @@ const Product = () => {
           {queryItems?.map((products, idx) => {
             return (
               <>
-                <Items product={products} key={idx} />
+                {products?.Count <= 0 ? (" ") :
+                    <Items product={products} key={idx} />
+                }
               </>
-            )
-          })}
+            )})}
         </div>
       </div>
     </>

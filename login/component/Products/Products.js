@@ -25,7 +25,10 @@ const Products = () => {
                 {items.reverse()?.map((products, idx) => {
                     return (
                         <>
-                            <Items product={products} key={idx} />
+                            {
+                                products?.Count <= 0 ? (" ") :
+                                    <Items product={products} key={idx} />
+                            }
                         </>
                     )
                 })}
