@@ -19,20 +19,30 @@ const Products = () => {
     return (
         <>
             <Static pic={pic1} heading={"Top Categories to choose from"} />
-            <div className={styles.ItemsHeading} ><span>Products For You</span></div>
+            {items.length == 0 || items === null ?
+                <div className={styles.nodatafound} >
+                    <h1>Product Loading...</h1>
+                </div>
+                :
+                <>
+                    <div className={styles.ItemsHeading} ><span>Products For You</span></div>
+                    <div className={styles.items} >
+                        {
+                            items.reverse()?.map((products, idx) => {
+                                return (
+                                    <>
+                                        {
+                                            products?.Count <= 0 ? (" ") :
+                                                <Items product={products} key={idx} />
+                                        }
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                </>
+            }
 
-            <div className={styles.items} >
-                {items.reverse()?.map((products, idx) => {
-                    return (
-                        <>
-                            {
-                                products?.Count <= 0 ? (" ") :
-                                    <Items product={products} key={idx} />
-                            }
-                        </>
-                    )
-                })}
-            </div>
             <div className={styles.foronlyMergin} ></div>
         </>
     )

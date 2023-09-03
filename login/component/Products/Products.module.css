@@ -16,3 +16,10 @@
     width: 90%;
     grid-template-columns: repeat(4, 1fr);
 }
+
+.nodatafound{
+    position: relative;
+    font-size: 2rem;
+    top: 10rem;
+    text-align: center;
+}

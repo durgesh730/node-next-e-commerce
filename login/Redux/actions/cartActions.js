@@ -77,3 +77,27 @@ export function DeleteProductsCarts(id) {
             })
     }
 }
+
+export const IncreaseItem = (IncreaseItem) => ({
+    type: types.INCREASE_ITEM,
+    payload: IncreaseItem
+})
+
+export function IncreaseItemFromCart(id, totalItem) {
+    console.log(id, totalItem, "redux durgesh chaudhary")
+    return (dispatch) => {
+        dispatch(AddToCartBegin)
+        return axios.put(`${url}/cart/updateproducts?q=${id}`, { totalItem }, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((res) => {
+                console.log(res.data, "res dyady")
+-                dispatch(IncreaseItem(res.data))
+            })
+            .catch((error) => {
+                dispatch(AddToCartFailure(error))
+            })
+    }
+}

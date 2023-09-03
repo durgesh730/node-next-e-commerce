@@ -5,7 +5,8 @@ const initialState = {
     loading: false,
     error: null,
     dataCart: [],
-    deleteProduct: []
+    deleteProduct: [],
+    IncreaseCnt: [],
 };
 
 export default function CartReducer(state = initialState, action) {
@@ -45,7 +46,12 @@ export default function CartReducer(state = initialState, action) {
                 loading: false,
                 dataCart: state.dataCart.filter(item => item.productId !== action.payload)
             }
-
+        case types.INCREASE_ITEM:
+            return {
+                ...state,
+                loading: false,
+                IncreaseCnt: action.payload,
+            }
         default:
             return state;
     }

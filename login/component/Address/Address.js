@@ -1,11 +1,11 @@
 import React from 'react'
 
 const Address = () => {
-    return (
-        <>
-
-        </>
-    )
+  return (
+    <div>
+      
+    </div>
+  )
 }
 
 export default Address
