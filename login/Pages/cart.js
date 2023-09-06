@@ -16,6 +16,7 @@ const cart = () => {
     const selector = useSelector(state => state.cart)
     const { loading, error, dataCart } = selector;
     const route = useRouter()
+    const [address, setAddress]= useState(false)
 
     const handleDelete = (id) => {
         dispatch(DeleteProductsCarts(id));
@@ -32,9 +33,10 @@ const cart = () => {
 
     return (
         <>
-            {
-                dataCart === null || dataCart?.length === 0 ? <Nodata /> :
+            {dataCart === null || dataCart?.length === 0 ? <Nodata /> :
                     <div className={styles.buttonProducts} >
+
+                        
                         <div className={styles.placeOrder} >
                             {dataCart?.map((items, ide) => {
                                 return (
@@ -50,6 +52,8 @@ const cart = () => {
                                 </Button>
                             </div>
                         </div>
+
+
                         <div className={styles.sidetotalCom}>
                             <Total />
                         </div>

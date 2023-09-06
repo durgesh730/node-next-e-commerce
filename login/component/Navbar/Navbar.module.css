@@ -2,7 +2,7 @@
     background-color: #E07575;
     position: fixed;
     width: 100%;
-    z-index: 1;
+    z-index: 500;
     color: white;
     font-size: 12px;
     padding: .7rem 2rem;
@@ -16,7 +16,7 @@
 
 .topnav {
     position: fixed;
-    z-index: 1;
+    z-index: 500;
     top: 2.5rem;
     padding: .7rem 0rem;
     width: 100%;
