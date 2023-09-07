@@ -1,10 +1,19 @@
-.Pricedetails{
-    font-size: 1.1rem;
+.Pricedetails {
+    font-size: 1rem;
     color: rgb(119, 119, 119);
+    font-weight: 600;
+    padding: 1rem 1rem;
+}
+
+.total {
+    background-color: white;
+}
+
+.totalrupee {
+    font-size: 1.2rem;
     font-weight: 600;
 }
 
-.totalrupee{
-    font-size: 1.2rem;
-    font-weight: 600;
+.detailstable{
+   font-size: 1.2rem;
 }

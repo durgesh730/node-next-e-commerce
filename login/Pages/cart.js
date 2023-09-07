@@ -9,23 +9,42 @@ import { Button } from "@mui/material"
 import { DeleteProductsCarts } from '@/Redux/actions/cartActions'
 import Nodata from "@/component/NoData/Nodata"
 import { useRouter } from "next/router"
+import { fetchProductsById } from "@/Redux/actions/productActions"
 
 const cart = () => {
     const dispatch = useDispatch()
-    const [price, setPrice] = useState([])
-    const selector = useSelector(state => state.cart)
-    const { loading, error, dataCart } = selector;
     const route = useRouter()
-    const [address, setAddress]= useState(false)
+    const [price, setPrice] = useState([])
+
+    const selector = useSelector(state => state.cart)
+    const select = useSelector(state => state.products);
+    const { loading, error, dataCart } = selector;
+    const { idItems } = select;
+    const [products, setProducts] = useState([]);
 
     const handleDelete = (id) => {
         dispatch(DeleteProductsCarts(id));
         dispatch(FetchUsercart());
     }
 
-    const handleRelocation =()=>{
+    const handleRelocation = () => {
         route.push('/userdetails')
     }
+        
+    useEffect(() => {
+        dataCart.map((element) => {
+            return dispatch(fetchProductsById(element.ProductId))
+        })
+    }, [dataCart])
+
+    useEffect(() => {
+        idItems.forEach(element => {
+            const exists = products.some(product => product.Id === element.Id);
+            if (!exists) {
+                setProducts(prevProducts => [...prevProducts, element]);
+            }
+        });
+    }, [idItems])
 
     useEffect(() => {
         dispatch(FetchUsercart())
@@ -33,31 +52,29 @@ const cart = () => {
 
     return (
         <>
-            {dataCart === null || dataCart?.length === 0 ? <Nodata /> :
-                    <div className={styles.buttonProducts} >
+            {products === null || products?.length === 0 ? <Nodata /> :
+                <div className={styles.buttonProducts} >
 
-                        
-                        <div className={styles.placeOrder} >
-                            {dataCart?.map((items, ide) => {
-                                return (
-                                    <Cart data={items.ProductId} totaltem={items.totalItem} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
-                                )
-                            })}
-                            <div className={styles.buybothbtn} >
-                                <Button className={styles.backtoshopbtn} variant="contained">
-                                    Back to shop
-                                </Button>
-                                <Button onClick={handleRelocation} className={styles.buybtn} variant="contained">
-                                    place order
-                                </Button>
-                            </div>
-                        </div>
-
-
-                        <div className={styles.sidetotalCom}>
-                            <Total />
+                    <div className={styles.placeOrder} >
+                        {products?.map((items, ide) => {
+                            return (
+                                <Cart data={items} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
+                            )
+                        })}
+                        <div className={styles.buybothbtn} >
+                            {/* <Button className={styles.backtoshopbtn} variant="contained">
+                                Back to shop
+                            </Button> */}
+                            <Button onClick={handleRelocation} className={styles.buybtn} variant="contained">
+                                place order
+                            </Button>
                         </div>
                     </div>
+
+                    <div className={styles.sidetotalCom}>
+                        <Total />
+                    </div>
+                </div>
             }
             <Footer />
         </>

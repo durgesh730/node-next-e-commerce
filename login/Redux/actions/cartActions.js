@@ -84,7 +84,6 @@ export const IncreaseItem = (IncreaseItem) => ({
 })
 
 export function IncreaseItemFromCart(id, totalItem) {
-    console.log(id, totalItem, "redux durgesh chaudhary")
     return (dispatch) => {
         dispatch(AddToCartBegin)
         return axios.put(`${url}/cart/updateproducts?q=${id}`, { totalItem }, {

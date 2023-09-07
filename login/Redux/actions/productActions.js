@@ -46,9 +46,11 @@ export function fetchQueryProducts(query) {
     }
 }
 
-export const fetchProductsbyIdSuccess = (products) => ({
+export const fetchProductsbyIdSuccess = (products) =>
+({
     type: types.FETCH_PRODUCTS_BY_ID_SUCCESS,
-    payload: products
+    payload: products,
+
 });
 
 export function fetchProductsById(query) {
