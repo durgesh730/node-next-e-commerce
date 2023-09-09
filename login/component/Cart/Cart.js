@@ -7,13 +7,13 @@ import Image from 'next/image';
 
 const Cart = ({ data, handleDelete, setPrice }) => {
   const dispatch = useDispatch();
-  const [Increase, setIncrease] = useState(data.Count);
+  const [Increase, setIncrease] = useState(data?.Count);
 
   const IncreaseItems = () => {
     let cnt = Increase;
     if (Increase < 5) {
       cnt = cnt + 1;
-      dispatch(IncreaseItemFromCart(data.Id, cnt));
+      dispatch(IncreaseItemFromCart(data?.Id, cnt));
       setIncrease(cnt);
     } else {
       toast.success('Items Not More than 5')
@@ -25,7 +25,7 @@ const Cart = ({ data, handleDelete, setPrice }) => {
     if (Increase > 1 && Increase <= 5) {
       cnt = cnt - 1;
       setIncrease(cnt)
-      dispatch(IncreaseItemFromCart(data.Id, cnt));
+      dispatch(IncreaseItemFromCart(data?.Id, cnt));
     }
     else { return }
   }
@@ -36,14 +36,14 @@ const Cart = ({ data, handleDelete, setPrice }) => {
         <div className={styles.CartItems} >
           <div className={styles.productanddetails} >
             <div className={styles.cartImg} >
-              <Image src={data.Images[0]} alt={data?.title || 'Product Image'} width={500} height={600} />
+              <Image src={data?.Images[0]} alt={data?.title || 'Product Image'} width={500} height={600} />
             </div>
 
             <div className={styles.ItemDetalis} >
-              <div className={styles.title} >{data.Title}</div>
+              <div className={styles.title} >{data?.Title}</div>
               <div className={styles.sizecart} >Size: M </div>
               <div className={styles.exactPrice} >
-                <span> ₹{data.Price}</span>
+                <span> ₹{data?.Price}</span>
                 <small className={styles.discoutdetails} >20% off</small>
               </div>
             </div>

@@ -1,5 +1,43 @@
-.addressBox{
+.gridDix {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    width: 55%;
+}
+
+.DelyEdit{
+    padding-top: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.addressBox {
+    background-color: white;
+    width: 100%;
+}
+
+.labelRadio {
+    padding-top: 1.2rem;
+    padding-left: 1rem;
+}
+
+.addresshead {
+    color: white;
+    align-items: center;
+    font-weight: 600;
+    padding: .6rem 2rem;
+    background-color: #E07575;
+    width: 100%;
+}
+
+.Deliverybtn button {
+    background-color: #E07575;
+    font-size: 1rem;
+    padding: .6rem 3rem;
+    color: white;
+}
+
+.Deliverybtn button:hover {
+    background-color: #E07575;
 }

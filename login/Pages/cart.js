@@ -10,11 +10,14 @@ import { DeleteProductsCarts } from '@/Redux/actions/cartActions'
 import Nodata from "@/component/NoData/Nodata"
 import { useRouter } from "next/router"
 import { fetchProductsById } from "@/Redux/actions/productActions"
+import Address from "@/component/Address/Address"
+import Progress from "@/component/Address/Stepper/Progress"
 
 const cart = () => {
     const dispatch = useDispatch()
     const route = useRouter()
     const [price, setPrice] = useState([])
+    const [active, setActive] = useState(0)
 
     const selector = useSelector(state => state.cart)
     const select = useSelector(state => state.products);
@@ -28,9 +31,9 @@ const cart = () => {
     }
 
     const handleRelocation = () => {
-        route.push('/userdetails')
+        setActive(1)
     }
-        
+
     useEffect(() => {
         dataCart.map((element) => {
             return dispatch(fetchProductsById(element.ProductId))
@@ -52,29 +55,45 @@ const cart = () => {
 
     return (
         <>
-            {products === null || products?.length === 0 ? <Nodata /> :
-                <div className={styles.buttonProducts} >
+            {products === null || products?.length === 0 ? <Nodata />
+                :
+                <>
+                    <div className={styles.progress} >
+                        {
+                            active > 0 ? <Progress active={active} /> : ""
+                        }
+                        <div className={styles.buttonProducts} >
+                            {active == 0 ?
+                                <div className={styles.placeOrder} >
+                                    {products?.map((items, ide) => {
+                                        return (
+                                            <Cart data={items} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
+                                        )
+                                    })}
+                                    <div className={styles.buybothbtn} >
+                                        <Button onClick={handleRelocation} className={styles.buybtn} variant="contained">
+                                            place order
+                                        </Button>
+                                    </div>
+                                </div>
+                                :
+                                ""}
+                            {active == 1 ? <Address setActive={setActive} /> : ""}
+                            {active == 2 ? <>
+                                {products?.map((items, ide) => {
+                                    return (
+                                        <Cart data={items} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
+                                    )
+                                })}
+                            </>
+                                : ""}
 
-                    <div className={styles.placeOrder} >
-                        {products?.map((items, ide) => {
-                            return (
-                                <Cart data={items} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
-                            )
-                        })}
-                        <div className={styles.buybothbtn} >
-                            {/* <Button className={styles.backtoshopbtn} variant="contained">
-                                Back to shop
-                            </Button> */}
-                            <Button onClick={handleRelocation} className={styles.buybtn} variant="contained">
-                                place order
-                            </Button>
+                            <div className={styles.sidetotalCom}>
+                                <Total />
+                            </div>
                         </div>
                     </div>
-
-                    <div className={styles.sidetotalCom}>
-                        <Total />
-                    </div>
-                </div>
+                </>
             }
             <Footer />
         </>

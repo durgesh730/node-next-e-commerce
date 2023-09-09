@@ -1,15 +1,19 @@
 
 .buttonProducts{
-    background-color: #F1F3F6;
-    position: relative;
-    padding-top: 10rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     gap: 6rem;
-    padding-bottom: 16rem;
-     
+    padding-bottom: 8rem;
+    padding-top:2rem;
 }
+
+.progress{
+    position: relative;
+    background-color: #F1F3F6;
+    padding-top: 10rem;
+}
+
 .cart {
     padding-bottom: 2rem;
 }
@@ -100,7 +104,7 @@
 .buybtn {
     background-color: #E07575;
     font-size: 1rem;
-    padding: 1rem 3rem;
+    padding: .6rem 2rem;
 }
 
 .buybtn:hover {
