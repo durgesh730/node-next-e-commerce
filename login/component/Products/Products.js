@@ -42,8 +42,6 @@ const Products = () => {
                     </div>
                 </>
             }
-
-            <div className={styles.foronlyMergin} ></div>
         </>
     )
 }

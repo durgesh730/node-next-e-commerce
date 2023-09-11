@@ -13,7 +13,6 @@ const details = () => {
   const dispatch = useDispatch();
   const resData = useSelector(state => state.products)
   const { loading, error, idItems } = resData
-  console.log(idItems, "items by ids")
 
   useEffect(() => {
     dispatch(fetchProductsById(data))

@@ -20,6 +20,7 @@
     top: 2.5rem;
     padding: .7rem 0rem;
     width: 100%;
+    line-height: 1.2rem;
     display: grid;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);

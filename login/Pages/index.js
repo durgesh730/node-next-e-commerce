@@ -12,7 +12,9 @@ const index = () => {
             <Provider store={store} >
                 <Navbar />
                 <Products />
+                <div style={{paddingTop:"15rem"}} >
                 <Footer />
+                </div>
             </Provider>
         </>
     )

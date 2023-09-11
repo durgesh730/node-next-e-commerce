@@ -12,6 +12,8 @@ import { useRouter } from "next/router"
 import { fetchProductsById } from "@/Redux/actions/productActions"
 import Address from "@/component/Address/Address"
 import Progress from "@/component/Address/Stepper/Progress"
+import Order from "@/component/Order/Order"
+import PaymentOpt from "@/component/Payment/PaymentOpt"
 
 const cart = () => {
     const dispatch = useDispatch()
@@ -59,9 +61,9 @@ const cart = () => {
                 :
                 <>
                     <div className={styles.progress} >
-                        {
-                            active > 0 ? <Progress active={active} /> : ""
-                        }
+
+                        {active > 0 ? <Progress active={active} /> : ""}
+
                         <div className={styles.buttonProducts} >
                             {active == 0 ?
                                 <div className={styles.placeOrder} >
@@ -79,14 +81,8 @@ const cart = () => {
                                 :
                                 ""}
                             {active == 1 ? <Address setActive={setActive} /> : ""}
-                            {active == 2 ? <>
-                                {products?.map((items, ide) => {
-                                    return (
-                                        <Cart data={items} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
-                                    )
-                                })}
-                            </>
-                                : ""}
+                            {active == 2 ? <Order data={products} setActive={setActive} /> : ""}
+                            {active == 3 ? <PaymentOpt />  : ""}
 
                             <div className={styles.sidetotalCom}>
                                 <Total />
