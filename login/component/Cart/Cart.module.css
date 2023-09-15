@@ -11,7 +11,7 @@
 .progress{
     position: relative;
     background-color: #F1F3F6;
-    padding-top: 10rem;
+    padding-top: 8rem;
 }
 
 .cart {
@@ -115,7 +115,6 @@
 
 .buybothbtn{
     position: relative;
-    padding-top: 2rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

@@ -37,7 +37,7 @@ const cart = () => {
     }
 
     useEffect(() => {
-        dataCart.map((element) => {
+        dataCart?.map((element) => {
             return dispatch(fetchProductsById(element.ProductId))
         })
     }, [dataCart])
@@ -82,7 +82,7 @@ const cart = () => {
                                 ""}
                             {active == 1 ? <Address setActive={setActive} /> : ""}
                             {active == 2 ? <Order data={products} setActive={setActive} /> : ""}
-                            {active == 3 ? <PaymentOpt />  : ""}
+                            {active == 3 ? <PaymentOpt /> : ""}
 
                             <div className={styles.sidetotalCom}>
                                 <Total />
