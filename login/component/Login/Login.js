@@ -1,11 +1,13 @@
-import Link from 'next/link'
-import styles from './Login.module.css'
+import Link from 'next/link';
+import styles from './Login.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userlogin } from '@/Redux/actions/userActions';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const dispatch = useDispatch()
+  const router = useRouter()
 
   const [exst, setExist] = useState(false);
   const [login, setLogin] = useState({ email: "", password: "" })
@@ -41,13 +43,14 @@ const Login = () => {
       localStorage.setItem("token", userInfo?.token);
       alert("Logged in successfully")
       setExist(false)
+      router.push(`/userdetails`)
 
     } else if (userInfo?.status === 404 && exst === true) {
       alert("Email not Exist")
       setExist(false)
     }
 
-    else if(userInfo?.status === 401 && exst === true){
+    else if (userInfo?.status === 401 && exst === true) {
       alert("Password not correct")
       setExist(false)
     }

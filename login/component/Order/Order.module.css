@@ -43,6 +43,16 @@
     background-color: #E07575;
 }
 
+.Nextbtn button{
+    background-color: #E07575; 
+    padding: .6rem 3rem;
+
+}
+
+.Nextbtn button:hover{
+    background-color: #E07575;
+}
+
 .CartItems {
     padding: 1rem 1rem;
 }
