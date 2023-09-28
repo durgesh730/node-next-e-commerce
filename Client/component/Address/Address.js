@@ -69,6 +69,7 @@ const Address = ({setActive}) => {
               />
             </RadioGroup>
           </FormControl>
+          
           <div className={styles.DelyEdit} >
             <div className={styles.Deliverybtn}>
               <button variant="contained" onClick={()=>{setActive(2)}} >DELIVERY HERE</button>
@@ -83,7 +84,6 @@ const Address = ({setActive}) => {
       <Dialog
         fullWidth
         open={isDeleteModalOpen}
-        // onClick={() => { setIsDeleteModalOpen(false) }}
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
