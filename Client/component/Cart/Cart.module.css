@@ -15,7 +15,7 @@
 }
 
 .cart {
-    padding-bottom: 2rem;
+    padding-bottom: .6rem;
 }
 
 .productanddetails {
@@ -115,7 +115,10 @@
 
 .buybothbtn{
     position: relative;
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    padding: 1rem 1rem;
+    box-shadow: 0px 0px 10px -7px black;
 }

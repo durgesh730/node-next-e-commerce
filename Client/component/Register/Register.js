@@ -59,6 +59,7 @@ const Register = () => {
           <h2>Welcome to Register</h2>
           <p>Hi, we are you glad you are back.<br /> Please Register</p>
         </div>
+        
         <div className={styles.form_data}>
           <form>
             <div className={styles.form_input}>
