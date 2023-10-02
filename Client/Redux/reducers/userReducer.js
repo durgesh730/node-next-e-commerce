@@ -2,13 +2,15 @@ import * as types from '../constants/userConstants';
 
 const initialState = {
   isRegistering: false,
+  isLoggingIn: false,
   userInfo: null,
+  isloading: false,
+  userData: [],
   error: null,
-  islogin: false,
 };
 
-export const userReducer = (state = initialState, action) => {
-  switch (action.type) {
+export const userReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
     case types.REGISTER_REQUEST:
       return {
         ...state,
@@ -19,32 +21,47 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isRegistering: false,
-        userInfo: action.payload,
+        userInfo: payload,
       };
     case types.REGISTER_FAILURE:
+    case types.LOGIN_FAILURE:
       return {
         ...state,
         isRegistering: false,
-        error: action.payload,
+        isLoggingIn: false,
+        error: payload,
       };
     case types.LOGIN_REQUEST:
       return {
         ...state,
-        islogin: true,
-        error: null
-      }
+        isLoggingIn: true,
+        error: null,
+      };
     case types.LOGIN_SUCCESS:
       return {
         ...state,
-        islogin: false,
-        userInfo: action.payload,
-      }
-    case types.REGISTER_FAILURE:
+        isLoggingIn: false,
+        userInfo: payload,
+      };
+    case types.Fetch_User_DATA_REQUEST:
       return {
         ...state,
-        islogin: false,
-        error: action.payload
-      }
+        isloading: true,
+        error: null,
+      };
+    case types.Fetch_User_DATA_SUCCESS:
+      return {
+        ...state,
+        isloading: false,
+        userData: payload,
+      };
+    case types.Fetch_User_DATA_FAILURE:
+      return {
+        ...state,
+        isloading: false,
+        error: payload,
+        userData: [],
+      };
     default:
       return state;
   }

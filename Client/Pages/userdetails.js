@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Box,
     Card,
@@ -18,6 +18,8 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserDataByToken } from '@/Redux/actions/userActions';
 const steps = [
     {
         icon: 'tabler:home',
@@ -35,11 +37,14 @@ const steps = [
 const userdetails = () => {
     const [value, setValue] = React.useState('option1');
     const [activeStep, setActiveStep] = useState(0);
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const dispatch = useDispatch();
+    const UData = useSelector(state => state.user)
+    const { error, isloading, userData } = UData;
+    const Useremail = userData.email
+
     const [formData, setFormData] = useState({
         username: '',
-        email: '',
+        email: Useremail,
         password: '',
         confirmPassword: '',
         firstName: '',
@@ -58,14 +63,6 @@ const userdetails = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handlePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleConfirmPasswordVisibility = () => {
-        setShowConfirmPassword(!showConfirmPassword);
-    };
-
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({
@@ -74,13 +71,16 @@ const userdetails = () => {
         }));
     };
 
-    const handleSelectChange = (event) => {
-        const { name, value } = event.target;
+    useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            email: Useremail,
         }));
-    };
+    }, [userData])
+
+    useEffect(() => {
+        dispatch(fetchUserDataByToken());
+    }, []);
 
     const getStepContent = (step) => {
         switch (step) {
@@ -122,7 +122,7 @@ const userdetails = () => {
                                 size="small"
                                 fullWidth
                                 type="email"
-                                label="Email"
+                                // label="Email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
