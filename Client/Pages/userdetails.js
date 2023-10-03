@@ -20,6 +20,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataByToken } from '@/Redux/actions/userActions';
+import { useRouter } from 'next/router';
 const steps = [
     {
         icon: 'tabler:home',
@@ -41,9 +42,11 @@ const userdetails = () => {
     const UData = useSelector(state => state.user)
     const { error, isloading, userData } = UData;
     const Useremail = userData.email
+    const router = useRouter()
+    console.log(activeStep, "nkjn")
 
     const [formData, setFormData] = useState({
-        username: '',
+        phone: '',
         email: Useremail,
         password: '',
         confirmPassword: '',
@@ -56,7 +59,14 @@ const userdetails = () => {
     });
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        if (!formData.firstName ||
+            !formData.email ||
+            !formData.lastName
+        ) {
+            alert("plz fill all details")
+        } else {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        }
     };
 
     const handleBack = () => {
@@ -70,6 +80,12 @@ const userdetails = () => {
             [name]: value,
         }));
     };
+
+    useEffect(() => {
+        if (activeStep > 2) {
+            router.push('/')
+        }
+    }, [activeStep])
 
     useEffect(() => {
         setFormData((prevData) => ({
@@ -112,8 +128,8 @@ const userdetails = () => {
                                 size="small"
                                 fullWidth
                                 label="Phone number"
-                                name="Phone number"
-                                value={formData.username}
+                                name="phone"
+                                value={formData.phone}
                                 onChange={handleChange}
                             />
                         </Grid>
@@ -122,7 +138,6 @@ const userdetails = () => {
                                 size="small"
                                 fullWidth
                                 type="email"
-                                // label="Email"
                                 name="email"
                                 value={formData.email}
                                 onChange={handleChange}
