@@ -18,8 +18,9 @@ import PaymentOpt from "@/component/Payment/PaymentOpt"
 const cart = () => {
     const dispatch = useDispatch()
     const route = useRouter()
-    const [price, setPrice] = useState([])
     const [active, setActive] = useState(0)
+    let totalPrice = 0;
+    let totalItem = 1;
 
     const selector = useSelector(state => state.cart)
     const select = useSelector(state => state.products);
@@ -68,8 +69,11 @@ const cart = () => {
                             {active == 0 ?
                                 <div className={styles.placeOrder} >
                                     {products?.map((items, ide) => {
+                                        // totalPrice +=  items.Price
+                                        // totalItem += ide
+                                        // console.log(totalPrice, "pric")
                                         return (
-                                            <Cart data={items} key={ide} handleDelete={handleDelete} setPrice={setPrice} />
+                                            <Cart data={items} key={ide} handleDelete={handleDelete} />
                                         )
                                     })}
                                     <div className={styles.buybothbtn} >

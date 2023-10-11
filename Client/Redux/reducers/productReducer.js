@@ -1,3 +1,4 @@
+import { calculateTotalItems, calculateTotalPrice } from '../actions/productActions';
 import * as types from '../constants/productConstant';
 
 const initialState = {
@@ -5,7 +6,9 @@ const initialState = {
     loading: false,
     error: null,
     queryItems: [],
-    idItems: []
+    idItems: [], // products at cart page
+    totalItems: 0,
+    totalPrice: 0,
 };
 
 export default function productReducer(state = initialState, action) {
@@ -43,7 +46,9 @@ export default function productReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                idItems: action.payload
+                totalItems: calculateTotalItems(action.payload),
+                totalPrice: calculateTotalPrice(action.payload),
+                idItems: action.payload,
             };
 
         default:

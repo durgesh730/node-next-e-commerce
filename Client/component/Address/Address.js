@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserDataByToken } from '@/Redux/actions/userActions';
 
 const Address = ({ setActive }) => {
-  const [selectedAddress, setSelectedAddress] = useState('address1');
+  const [selectedAddress, setSelectedAddress] = useState(0);
   const [addressType, setAddressType] = useState('addressType');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [fullname, setFullname] = useState('');
@@ -41,7 +41,7 @@ const Address = ({ setActive }) => {
   }
 
   const handleChange = (event) => {
-    setSelectedAddress(event.target.value);
+    setSelectedAddress(parseInt(event.target.value, 10));
   };
 
   useEffect(() => {
@@ -55,40 +55,48 @@ const Address = ({ setActive }) => {
           <Typography sx={{ fontWeight: 600 }} > DELIVERY ADDRESS</Typography>
         </div>
 
-        <Box sx={{ padding: "2rem 2rem" }} className={styles.addressBox} >
-          <FormControl component="fieldset">
-            <RadioGroup
-              aria-label="address"
-              name="address"
-              value={selectedAddress}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value="address1"
-                control={<Radio />}
-                label={
-                  <div className={styles.labelRadio} >
-                    <Typography sx={{ display: 'flex', flexDirection: "row", gap: "2rem" }} >{userData.firstName ? (userData.firstName, userData.lastname) : "Not Available"}
-                      <Typography> {userData.phone ? userData.phone : "Not Available"}</Typography>
-                    </Typography>
-                    <Typography sx={{ paddingTop: ".3rem" }}>
-                      This is a paragraph inside the label. You can write anything here.
-                    </Typography>
-                  </div>
-                }
-              />
-            </RadioGroup>
-          </FormControl>
+        {userData.addresses?.map((item, index) => {
+          return (
+            <Box sx={{ padding: "2rem 2rem" }} className={styles.addressBox} >
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="address"
+                  name="address"
+                  value={selectedAddress}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value={index}
+                    control={<Radio />}
+                    label={
+                      <div className={styles.labelRadio} >
+                        <Typography sx={{ display: 'flex', flexDirection: "row", gap: "2rem" }} >
+                          {userData.firstName ? (userData.firstName, userData.lastname) : "Not Available"}
+                          <Typography> {userData.phone ? userData.phone : "Not Available"}</Typography>
+                        </Typography>
+                        <Typography sx={{ paddingTop: ".3rem" }}>
+                          {item.street} {item.city} {item.country}
+                        </Typography>
+                      </div>
+                    }
+                  />
+                </RadioGroup>
+              </FormControl>
 
-          <div className={styles.DelyEdit} >
-            <div className={styles.Deliverybtn}>
-              <button variant="contained" onClick={() => { setActive(2) }} >DELIVERY HERE</button>
-            </div>
-            <div>
-              <button variant="contained" onClick={() => { setIsDeleteModalOpen(true) }} >EDIT</button>
-            </div>
-          </div>
-        </Box>
+              <div className={styles.DelyEdit} >
+                {selectedAddress == index ?
+                  <div className={styles.Deliverybtn}>
+                    <button variant="contained" onClick={() => { setActive(2) }} >DELIVERY HERE</button>
+                  </div>
+                  : ""
+                }
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "flex-end" }} >
+                  <button variant="contained" onClick={() => { setIsDeleteModalOpen(true) }} >EDIT</button>
+                </div>
+              </div>
+            </Box>
+          )
+        })}
       </Box>
 
       <Dialog

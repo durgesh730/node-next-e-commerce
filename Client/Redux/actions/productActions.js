@@ -2,66 +2,40 @@ import axios from 'axios';
 import * as types from '../constants/productConstant';
 import { url } from '@/host';
 
-export const fetchProductsBegin = () => ({
-    type: types.FETCH_PRODUCTS_BEGIN
-});
-
-export const fetchProductsSuccess = (products) => ({
-    type: types.FETCH_PRODUCTS_SUCCESS,
-    payload: products
-});
-
-export const fetchProductsFailure = (error) => ({
-    type: types.FETCH_PRODUCTS_FAILURE,
-    payload: error
-});
-
-export function fetchProducts() {
-    return (dispatch) => {
-        dispatch(fetchProductsBegin());
-        return axios.get(`${url}/getproduct`)
-            .then(response => {
-                dispatch(fetchProductsSuccess(response.data));
-            })
-            .catch(error => dispatch(fetchProductsFailure(error)));
-    };
-}
-
-
-export const fetchQueryProductsSuccess = (products) => ({
-    type: types.FETCH_QUERY_PRODUCTS_SUCCESS,
-    payload: products
-});
-
-export function fetchQueryProducts(query) {
-    return (dispatch) => {
-        dispatch(fetchProductsBegin());
-        return axios.get(`${url}/getQueryproduct?q=${query}`)
-            .then((res) => {
-                dispatch(fetchQueryProductsSuccess(res.data));
-            })
-            .catch((error) => {
-                dispatch(fetchProductsFailure(error));
-            })
-    }
-}
-
-export const fetchProductsbyIdSuccess = (products) =>
-({
-    type: types.FETCH_PRODUCTS_BY_ID_SUCCESS,
+// Action creator for fetching products
+const fetchProductsBegin = () => ({ type: types.FETCH_PRODUCTS_BEGIN });
+const fetchProductsSuccess = (type, products) => ({
+    type,
     payload: products,
-
+});
+const fetchProductsFailure = (type, error) => ({
+    type,
+    payload: error,
 });
 
-export function fetchProductsById(query) {
-    return (dispatch) => {
-        dispatch(fetchProductsBegin());
-        return axios.get(`${url}/getproductbyId?q=${query}`)
-            .then((res) => {
-                dispatch(fetchProductsbyIdSuccess(res.data));
-            })
-            .catch((error) => {
-                dispatch(fetchProductsFailure(error));
-            })
-    }
-}
+const fetchProducts = (url, type, query) => (dispatch) => {
+    dispatch(fetchProductsBegin());
+    return axios
+        .get(url)
+        .then((response) => {
+            dispatch(fetchProductsSuccess(type, response.data));
+        })
+        .catch((error) => dispatch(fetchProductsFailure(type, error)));
+};
+
+// Fetch all products
+export const fetchAllProducts = () => fetchProducts(`${url}/getproduct`, types.FETCH_PRODUCTS_SUCCESS);
+
+// Fetch products by query
+export const fetchQueryProducts = (query) => fetchProducts(`${url}/getQueryproduct?q=${query}`, types.FETCH_QUERY_PRODUCTS_SUCCESS);
+
+// Fetch products by ID
+export const fetchProductsById = (query) => fetchProducts(`${url}/getproductbyId?q=${query}`, types.FETCH_PRODUCTS_BY_ID_SUCCESS);
+
+export const calculateTotalItems = (items) => {
+    return items.reduce((total, item) => total + item.quantity, 0);
+};
+
+export const calculateTotalPrice = (items) => {
+    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+};
