@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography, Box, Button, Grid } from '@mui/material';
 import styles from "./Address.module.css";
 import { Radio, RadioGroup, FormControlLabel, FormControl } from '@material-ui/core';
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material'
 import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserDataByToken } from '@/Redux/actions/userActions';
 
-const Address = ({setActive}) => {
+const Address = ({ setActive }) => {
   const [selectedAddress, setSelectedAddress] = useState('address1');
   const [addressType, setAddressType] = useState('addressType');
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -16,6 +18,10 @@ const Address = ({setActive}) => {
   const [state, setState] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [country, setCountry] = useState('');
+  const select = useSelector(state => state.user);
+  const dispatch = useDispatch()
+  const { loading, error, userData } = select
+  // console.log(userData.addresses, "info")
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +44,10 @@ const Address = ({setActive}) => {
     setSelectedAddress(event.target.value);
   };
 
+  useEffect(() => {
+    dispatch(fetchUserDataByToken())
+  }, [])
+
   return (
     <>
       <Box className={styles.gridDix} >
@@ -58,8 +68,8 @@ const Address = ({setActive}) => {
                 control={<Radio />}
                 label={
                   <div className={styles.labelRadio} >
-                    <Typography sx={{ display: 'flex', flexDirection: "row", gap: "2rem" }} >Durgesh Chaudhary
-                      <Typography> 8052941488</Typography>
+                    <Typography sx={{ display: 'flex', flexDirection: "row", gap: "2rem" }} >{userData.firstName ? (userData.firstName, userData.lastname) : "Not Available"}
+                      <Typography> {userData.phone ? userData.phone : "Not Available"}</Typography>
                     </Typography>
                     <Typography sx={{ paddingTop: ".3rem" }}>
                       This is a paragraph inside the label. You can write anything here.
@@ -69,10 +79,10 @@ const Address = ({setActive}) => {
               />
             </RadioGroup>
           </FormControl>
-          
+
           <div className={styles.DelyEdit} >
             <div className={styles.Deliverybtn}>
-              <button variant="contained" onClick={()=>{setActive(2)}} >DELIVERY HERE</button>
+              <button variant="contained" onClick={() => { setActive(2) }} >DELIVERY HERE</button>
             </div>
             <div>
               <button variant="contained" onClick={() => { setIsDeleteModalOpen(true) }} >EDIT</button>

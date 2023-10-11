@@ -9,3 +9,8 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const Fetch_User_DATA_REQUEST = 'Fetch_User_DATA_REQUEST';
 export const Fetch_User_DATA_SUCCESS = 'Fetch_User_DATA_SUCCESS';
 export const Fetch_User_DATA_FAILURE = 'Fetch_User_DATA_FAILURE';
+
+export const UPDATE_USER_DATA_REQUEST = 'UPDATE_USER_DATA_REQUEST';
+export const UPDATE_USER_DATA_SUCCESS = 'UPDATE_USER_DATA_REQUEST';
+export const UPDATE_USER_DATA_FAILURE = 'UPDATE_USER_DATA_REQUEST';
+

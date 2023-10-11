@@ -34,7 +34,6 @@ const loginFailure = (error) => ({ type: types.LOGIN_FAILURE, payload: error });
 
 export const userlogin = (logg) => (dispatch) => {
   dispatch(loginRequest());
-
   return axios
     .post(`${url}/user/login`, {
       email: logg.email,
@@ -52,7 +51,7 @@ export const userlogin = (logg) => (dispatch) => {
     );
 };
 
-// Action creators for login
+// Action creators for userData
 const UserDataRequest = () => ({ type: types.Fetch_User_DATA_REQUEST });
 const UserDataSuccess = (userInfo) => ({ type: types.Fetch_User_DATA_SUCCESS, payload: userInfo });
 const UserDataFailure = (error) => ({ type: types.Fetch_User_DATA_FAILURE, payload: error });
@@ -76,3 +75,25 @@ export const fetchUserDataByToken = () => (dispatch) => {
       dispatch(UserDataFailure(errorMsg))
     });
 };
+
+// Action creators for userData
+const UpdateUserAddressRequest = () => ({ type: types.UPDATE_USER_DATA_REQUEST });
+const UpdateUserAddressSuccess = (userInfo) => ({ type: types.UPDATE_USER_DATA_SUCCESS, payload: userInfo });
+const UpdateUserAddressFailure = (error) => ({ type: types.UPDATE_USER_DATA_FAILURE, payload: error });
+
+export const UpdateUserAddress = (data) => (dispatch) => {
+  dispatch(UpdateUserAddressRequest());
+  axios
+    .put(`${url}//user/AddAddress/`, data, {
+      headers: {
+        Authorization: localStorage.getItem('token'),
+        'Content-Type': "application/json",
+      },
+    }).then((res) => {
+      dispatch(UpdateUserAddressSuccess(res.data))
+    })
+    .catch((err) => {
+      const errorMsg = err.response?.data;
+      dispatch(UpdateUserAddressFailure(errorMsg))
+    })
+}

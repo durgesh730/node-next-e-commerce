@@ -7,6 +7,7 @@ const initialState = {
   isloading: false,
   userData: [],
   error: null,
+  isUpdate: false
 };
 
 export const userReducer = (state = initialState, { type, payload }) => {
@@ -62,6 +63,19 @@ export const userReducer = (state = initialState, { type, payload }) => {
         error: payload,
         userData: [],
       };
+    case types.UPDATE_USER_DATA_REQUEST:
+      return {
+        ...state,
+        isloading: true,
+        error: null
+      }
+    case types.UPDATE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        isloading: false,
+        isUpdate: true,
+        userInfo: payload,
+      }
     default:
       return state;
   }

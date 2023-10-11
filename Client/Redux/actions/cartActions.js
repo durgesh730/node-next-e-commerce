@@ -93,7 +93,7 @@ export function IncreaseItemFromCart(id, totalItem) {
         })
             .then((res) => {
                 console.log(res.data, "res dyady")
--                dispatch(IncreaseItem(res.data))
+                    - dispatch(IncreaseItem(res.data))
             })
             .catch((error) => {
                 dispatch(AddToCartFailure(error))

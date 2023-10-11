@@ -19,7 +19,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserDataByToken } from '@/Redux/actions/userActions';
+import { UpdateUserAddress, fetchUserDataByToken } from '@/Redux/actions/userActions';
 import { useRouter } from 'next/router';
 const steps = [
     {
@@ -36,14 +36,13 @@ const steps = [
 
 
 const userdetails = () => {
-    const [value, setValue] = React.useState('option1');
+    const [value, setValue] = useState('option1');
     const [activeStep, setActiveStep] = useState(0);
     const dispatch = useDispatch();
     const UData = useSelector(state => state.user)
     const { error, isloading, userData } = UData;
     const Useremail = userData.email
     const router = useRouter()
-    console.log(activeStep, "nkjn")
 
     const [formData, setFormData] = useState({
         phone: '',
@@ -56,7 +55,16 @@ const userdetails = () => {
         state: '',
         country: '',
         zipCode: '',
+        city: ''
     });
+
+    const address = {
+        state: formData.state,
+        country: formData.country,
+        zipCode: formData.zipCode,
+        street: formData.street,
+        city: formData.city
+    }
 
     const handleNext = () => {
         if (!formData.firstName ||
@@ -67,6 +75,11 @@ const userdetails = () => {
         } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
+
+        if (activeStep >= 1) {
+            dispatch(UpdateUserAddress(address));
+        }
+
     };
 
     const handleBack = () => {
