@@ -4,12 +4,13 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userlogin } from '@/Redux/actions/userActions';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const [exst, setExist] = useState(false);
+  const [exist, setExist] = useState(false);
   const [login, setLogin] = useState({ email: "", password: "" })
   const [passShow, setPassshow] = useState(false);
 
@@ -25,11 +26,11 @@ const Login = () => {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const isValid = emailPattern.test(email);
     if (email === '') {
-      alert("Email is required")
+      toast.error("Email is required")
     } else if (password == '') {
-      alert("Password is required")
+      toast.error("Password is required")
     } else if (!isValid) {
-      alert("email is not valid")
+      toast.error("email is not valid")
     } else {
       dispatch(userlogin(login))
       setExist(true);
@@ -37,21 +38,18 @@ const Login = () => {
   }
 
   useEffect(() => {
-
-    if (userInfo?.status === 201 && exst === true) {
+    if (userInfo?.status === 201 && exist === true) {
       localStorage.setItem("user", userInfo?.user._id);
       localStorage.setItem("token", userInfo?.token);
-      alert("Logged in successfully")
+      toast.success("Logged in successfully")
       setExist(false)
       router.push(`/userdetails`)
-
-    } else if (userInfo?.status === 404 && exst === true) {
-      alert("Email not Exist")
+    } else if (userInfo?.status === 404 && exist === true) {
+      toast.error("Email not Exist")
       setExist(false)
     }
-
-    else if (userInfo?.status === 401 && exst === true) {
-      alert("Password not correct")
+    else if (userInfo?.status === 401 && exist === true) {
+      toast.error("Password not correct")
       setExist(false)
     }
   }, [userInfo])
@@ -68,7 +66,19 @@ const Login = () => {
           <form>
             <div className={styles.form_input}>
               <label htmlFor='email'>Email</label>
-              <input type='email' name="email" id='email' placeholder='Enter Your Email Address' value={login.email} onChange={(e) => { setLogin((prev) => ({ ...prev, email: e.target.value })) }} />
+              <input
+                type='email'
+                name="email"
+                id='email'
+                placeholder='Enter Your Email Address'
+                value={login.email}
+                onChange={(e) => {
+                  setLogin((prev) => ({
+                    ...prev,
+                    email: e.target.value
+                  }))
+                }}
+              />
             </div>
 
             <div className={styles.form_input}>
