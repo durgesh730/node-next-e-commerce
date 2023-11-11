@@ -21,6 +21,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import { UpdateUserAddress, fetchUserDataByToken } from '@/Redux/actions/userActions';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 const steps = [
     {
         icon: 'tabler:home',
@@ -41,17 +42,16 @@ const userdetails = () => {
     const dispatch = useDispatch();
     const UData = useSelector(state => state.user)
     const { error, isloading, userData } = UData;
-    const Useremail = userData.email
     const router = useRouter()
 
     const [formData, setFormData] = useState({
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
         phone: '',
-        email: Useremail,
         password: '',
         confirmPassword: '',
-        firstName: '',
         street: '',
-        lastName: '',
         state: '',
         country: '',
         zipCode: '',
@@ -71,7 +71,7 @@ const userdetails = () => {
             !formData.email ||
             !formData.lastName
         ) {
-            alert("plz fill all details")
+            toast.error('plz fill all details')
         } else {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
         }
@@ -103,7 +103,10 @@ const userdetails = () => {
     useEffect(() => {
         setFormData((prevData) => ({
             ...prevData,
-            email: Useremail,
+            email: userData.email,
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            phone: userData.phone,
         }));
     }, [userData])
 

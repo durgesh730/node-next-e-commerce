@@ -4,6 +4,7 @@ import styles from './Register.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '@/Redux/actions/userActions';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const Register = () => {
   const [passShow, setPassshow] = useState(false);
   const [cpassShow, setCPassshow] = useState(false);
   const [logg, setLogg] = useState({ email: "", password: "", cpassword: "" })
-
+  const route = useRouter()
   const userRegister = useSelector(state => state.user);
   // get user data from response/redux
   const { userInfo, error } = userRegister;
@@ -45,6 +46,11 @@ const Register = () => {
       localStorage.setItem("token", userInfo?.token);
       toast.success("Registed successfully")
       setExist(false)
+      if (userInfo?.user.addresses.length == 0) {
+        route.push(`/userdetails`)
+      } else {
+        route.push(`/`);
+      }
     } else if (userInfo?.status === 409 && exist === true) {
       toast.success("user already exist")
       setExist(false)

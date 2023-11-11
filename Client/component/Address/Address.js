@@ -21,7 +21,6 @@ const Address = ({ setActive }) => {
   const select = useSelector(state => state.user);
   const dispatch = useDispatch()
   const { loading, error, userData } = select
-  // console.log(userData.addresses, "info")
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -17,13 +17,16 @@ import toast from 'react-hot-toast';
 const Details = ({ product }) => {
   const router = useRouter()
   const dispatch = useDispatch()
+  const user = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const selector = useSelector(state => state.cart)
-  const { loading, error, cart } = selector
+  const { loading, error, cart } = selector;
 
   const handlecart = (id) => {
-    dispatch(AddtoCart(id))
-    toast.success('Added Successfully!')
-    router.push('/cart')
+    if (user) {
+      dispatch(AddtoCart(id))
+      toast.success('Added Successfully!')
+      router.push('/cart')
+    }
   }
 
   return (

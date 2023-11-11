@@ -43,7 +43,11 @@ const Login = () => {
       localStorage.setItem("token", userInfo?.token);
       toast.success("Logged in successfully")
       setExist(false)
-      router.push(`/userdetails`)
+      if (userInfo?.user.addresses.length == 0) {
+        router.push(`/userdetails`)
+      } else {
+        router.push(`/`);
+      }
     } else if (userInfo?.status === 404 && exist === true) {
       toast.error("Email not Exist")
       setExist(false)
