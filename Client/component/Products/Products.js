@@ -5,7 +5,7 @@ import Items from './Items/Items'
 import styles from "./Products.module.css"
 import pic1 from '../../image/durgesh.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchProducts } from '@/Redux/actions/productActions'
+import { fetchAllProducts } from '@/Redux/actions/productActions'
 
 const Products = () => {
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const Products = () => {
     const { error, loading, items } = productsData;
 
     useEffect(() => {
-        dispatch(fetchProducts());
+        dispatch(fetchAllProducts());
     }, [dispatch]);
 
     return (
@@ -31,8 +31,7 @@ const Products = () => {
                             items.reverse()?.map((products, idx) => {
                                 return (
                                     <>
-                                        {
-                                            products?.Count <= 0 ? (" ") :
+                                        {products?.Count <= 0 ? (" ") :
                                                 <Items product={products} key={idx} />
                                         }
                                     </>
