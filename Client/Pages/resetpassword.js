@@ -5,8 +5,8 @@ import React from 'react'
 const resetpassword = () => {
   return (
     <>
-         <ResetPass/>
-         <Footer/>
+      <ResetPass />
+      <Footer />
     </>
   )
 }

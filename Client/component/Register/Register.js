@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '@/Redux/actions/userActions';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import useDataValidation from '@/Customhooks/useDataValidation';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -17,24 +18,14 @@ const Register = () => {
   const userRegister = useSelector(state => state.user);
   // get user data from response/redux
   const { userInfo, error } = userRegister;
+  
+  // custom hook
+  const { validateData } = useDataValidation()
 
   const Registeruser = (e) => {
     e.preventDefault();
-    const { email, password, cpassword } = logg;
-    // Check if the email is valid using a regular expression
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const isValid = emailPattern.test(email);
-    if (email === '') {
-      toast.error("email is required")
-    } else if (password == '') {
-      toast.error("password is required")
-    } else if (cpassword == '') {
-      toast.error("confirm password required")
-    } else if (!isValid) {
-      toast.error("email is not valid")
-    } else if (password !== cpassword) {
-      toast.error("password not matched")
-    } else {
+    const valid = validateData(logg)
+    if (valid) {
       dispatch(register(logg))
       setExist(true);
     }

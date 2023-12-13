@@ -5,8 +5,8 @@ import React from 'react'
 const verifyotp = () => {
   return (
     <>
-        <VerifyOtp/>
-        <Footer/>
+      <VerifyOtp />
+      <Footer />
     </>
   )
 }

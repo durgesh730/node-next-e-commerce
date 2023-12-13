@@ -33,9 +33,9 @@ export const fetchQueryProducts = (query) => fetchProducts(`${url}/getQueryprodu
 export const fetchProductsById = (query) => fetchProducts(`${url}/getproductbyId?q=${query}`, types.FETCH_PRODUCTS_BY_ID_SUCCESS);
 
 export const calculateTotalItems = (items) => {
-    return items.reduce((total, item) => total + item.quantity, 0);
+    return items?.reduce((total, item) => total + item.quantity, 0);
 };
 
 export const calculateTotalPrice = (items) => {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+    return items?.reduce((total, item) => total + item.price * item.quantity, 0);
 };
