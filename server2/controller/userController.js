@@ -1,24 +1,20 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const generateToken = require('../helper/generateToken');
 
 const registerUser = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password, firstName } = req.body;
 
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.status(409).json({ msg: 'User already exists', status: 409 });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ email, password: hashedPassword });
-
-        if (!user.addresses) {
-            user.addresses = [];
-        }
+        const user = new User({ firstName, email, password: hashedPassword });
 
         const savedUser = await user.save();
-        const token = jwt.sign({ userId: savedUser._id }, process.env.jwtKey, { expiresIn: '24h' });
 
+        const token = generateToken(savedUser._id)
         res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
 
         res.status(201).json({ token, msg: 'User successfully registered' });
@@ -32,33 +28,26 @@ const loginUser = async (req, res) => {
         const { email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
-        if (!existingUser) {
-            return res.status(404).json({ msg: 'Email not found', status: 404 });
-        }
+        if (!existingUser) return res.status(404).json({ msg: 'Email not found', status: 404 });
 
         const passwordMatch = await bcrypt.compare(password, existingUser.password);
-        if (!passwordMatch) {
-            return res.status(401).json({ msg: 'Invalid password', status: 401 });
-        }
+        if (!passwordMatch) return res.status(401).json({ msg: 'Invalid password', status: 401 });
 
-        const token = jwt.sign({ userId: existingUser._id }, process.env.jwtKey, { expiresIn: '24h' });
-
+        const token = generateToken(existingUser._id);
         res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
 
-        res.status(201).json({ token, msg: 'User successfully logged in' });
+        res.status(201).json({ token, msg: 'User successfully Logged In' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-const getUsersEndpoint = async (req, res) => {
+const getUser = async (req, res) => {
     try {
         const userId = req.userId;
         const user = await User.findById(userId);
 
-        if (!user) {
-            return res.status(404).json({ message: 'User not found', status: 404 });
-        }
+        if (!user) return res.status(404).json({ message: 'User not found', status: 404 });
 
         res.status(200).json(user);
     } catch (error) {
@@ -77,9 +66,7 @@ const addAddress = async (req, res) => {
             { new: true }
         );
 
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found', status: 404 });
-        }
+        if (!updatedUser) return res.status(404).json({ message: 'User not found', status: 404 });
 
         res.status(200).json({ message: 'Document updated successfully' });
     } catch (error) {
@@ -90,6 +77,6 @@ const addAddress = async (req, res) => {
 module.exports = {
     registerUser,
     loginUser,
-    getUsersEndpoint,
+    getUser,
     addAddress,
 };
