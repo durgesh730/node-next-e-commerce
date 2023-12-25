@@ -5,10 +5,17 @@ import { toast } from 'react-hot-toast'
 import { IncreaseItemFromCart } from '@/Redux/actions/cartActions'
 import Image from 'next/image';
 
-const Cart = ({ data, handleDelete, index, setTotal, total, setIncrease, Increase, totalp }) => {
+const Cart = ({
+  data,
+  handleDelete,
+  index,
+  setTotal,
+  total,
+  setIncrease,
+  Increase
+}) => {
+
   const dispatch = useDispatch();
-
-
   // console.log()
 
   const IncreaseItems = () => {
@@ -17,7 +24,7 @@ const Cart = ({ data, handleDelete, index, setTotal, total, setIncrease, Increas
       cnt = cnt + 1;
       dispatch(IncreaseItemFromCart(data?.Id, cnt));
       setIncrease(cnt);
-      setTotal(totalp)
+      // setTotal(totalp)
     } else {
       toast.success('Items Not More than 5')
     }
@@ -28,7 +35,7 @@ const Cart = ({ data, handleDelete, index, setTotal, total, setIncrease, Increas
     if (Increase > 1 && Increase <= 5) {
       cnt = cnt - 1;
       setIncrease(cnt)
-      setTotal(totalp)
+      // setTotal(totalp)
       dispatch(IncreaseItemFromCart(data?.Id, cnt));
     }
     else { return }

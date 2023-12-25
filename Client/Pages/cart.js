@@ -26,20 +26,11 @@ const cart = () => {
     const { idItems } = select;
     const [products, setProducts] = useState([]);
     const [Increase, setIncrease] = useState(1);
-    let totalp = 0;
-
-    const calculateTotal = () => {
-        totalp += data.Price * Increase;
-        setTotal(totalp)
-    };
-
-    useEffect(() => {
-        calculateTotal()
-    }, [Increase])
 
     const handleDelete = (id) => {
         dispatch(DeleteProductsCarts(id));
         dispatch(FetchUsercart());
+        window.location.reload()
     }
 
     const handleRelocation = () => {
@@ -89,7 +80,6 @@ const cart = () => {
                                                 total={total}
                                                 Increase={Increase}
                                                 setIncrease={setIncrease}
-                                                totalp={totalp}
                                             />
                                         )
                                     })}
