@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 const useDataValidation = () => {
@@ -23,4 +24,23 @@ const useDataValidation = () => {
     return { validateData }
 }
 
-export default useDataValidation
+// Custom hook to calculate total price from items in the cart
+// const useCalculateTotalPrice = (cartItems, count) => {
+//     const [totalPrice, setTotalPrice] = useState(0);
+
+//     useEffect(() => {
+//         // Function to calculate total price
+//         const calculateTotal = () => {
+//             let total = 0;
+//             // Loop through each item in the cart and sum up their prices
+//             total += cartItems.Price * count;
+//             setTotalPrice(total);
+//         };
+
+//         // Calculate total price whenever cartItems change
+//         calculateTotal();
+//     }, [cartItems]);
+//     return totalPrice;
+// };
+
+export { useCalculateTotalPrice, useDataValidation };

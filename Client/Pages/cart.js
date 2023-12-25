@@ -19,14 +19,23 @@ const cart = () => {
     const dispatch = useDispatch()
     const route = useRouter()
     const [active, setActive] = useState(0)
-    let totalPrice = 0;
-    let totalItem = 1;
-
+    const [total, setTotal] = useState()
     const selector = useSelector(state => state.cart)
     const select = useSelector(state => state.products);
     const { loading, error, dataCart } = selector;
     const { idItems } = select;
     const [products, setProducts] = useState([]);
+    const [Increase, setIncrease] = useState(1);
+    let totalp = 0;
+
+    const calculateTotal = () => {
+        totalp += data.Price * Increase;
+        setTotal(totalp)
+    };
+
+    useEffect(() => {
+        calculateTotal()
+    }, [Increase])
 
     const handleDelete = (id) => {
         dispatch(DeleteProductsCarts(id));
@@ -69,11 +78,19 @@ const cart = () => {
                             {active == 0 ?
                                 <div className={styles.placeOrder} >
                                     {products?.map((items, ide) => {
-                                        // totalPrice +=  items.Price
-                                        // totalItem += ide
-                                        // console.log(totalPrice, "pric")
                                         return (
-                                            <Cart data={items} key={ide} handleDelete={handleDelete} />
+                                            <Cart
+                                                data={items}
+                                                setTotal={setTotal}
+                                                setProducts={setProducts}
+                                                key={ide}
+                                                index={ide}
+                                                handleDelete={handleDelete}
+                                                total={total}
+                                                Increase={Increase}
+                                                setIncrease={setIncrease}
+                                                totalp={totalp}
+                                            />
                                         )
                                     })}
                                     <div className={styles.buybothbtn} >
@@ -89,7 +106,9 @@ const cart = () => {
                             {active == 3 ? <PaymentOpt /> : ""}
 
                             <div className={styles.sidetotalCom}>
-                                <Total />
+                                <Total
+                                    totalPrice={totalp}
+                                />
                             </div>
                         </div>
                     </div>

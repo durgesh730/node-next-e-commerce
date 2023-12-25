@@ -8,15 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useSelector } from 'react-redux';
 
-const Total = () => {
-
-  const select = useSelector((state) => state.products);
-  const { totalItems, totalPrice } = select
-
-  console.log(totalItems, totalPrice, "durgesh chaudhary")
-  
+const Total = ({ totalPrice }) => {
   return (
     <>
       <div className={styles.total} >
@@ -48,7 +41,7 @@ const Total = () => {
             <TableBody>
               <TableRow sx={{ '&:last-child td, &:last-child th': { borderTop: 1, borderColor: "#F1F3F6" } }}>
                 <TableCell className={styles.totalrupee} >Total</TableCell>
-                <TableCell className={styles.totalrupee} >₹{ }</TableCell>
+                <TableCell className={styles.totalrupee} >₹{totalPrice}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

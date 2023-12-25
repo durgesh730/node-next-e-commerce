@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '@/Redux/actions/userActions';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import useDataValidation from '@/Customhooks/useDataValidation';
+import {useDataValidation} from '@/Customhooks/useDataValidation';
 
 const Register = () => {
   const dispatch = useDispatch();

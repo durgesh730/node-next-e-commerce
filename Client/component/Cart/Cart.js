@@ -1,13 +1,15 @@
 import styles from './Cart.module.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { toast } from 'react-hot-toast'
 import { IncreaseItemFromCart } from '@/Redux/actions/cartActions'
 import Image from 'next/image';
 
-const Cart = ({ data, handleDelete, setPrice }) => {
+const Cart = ({ data, handleDelete, index, setTotal, total, setIncrease, Increase, totalp }) => {
   const dispatch = useDispatch();
-  const [Increase, setIncrease] = useState(data?.Count);
+
+
+  // console.log()
 
   const IncreaseItems = () => {
     let cnt = Increase;
@@ -15,21 +17,23 @@ const Cart = ({ data, handleDelete, setPrice }) => {
       cnt = cnt + 1;
       dispatch(IncreaseItemFromCart(data?.Id, cnt));
       setIncrease(cnt);
+      setTotal(totalp)
     } else {
       toast.success('Items Not More than 5')
     }
   }
 
-  const DecreaseItems = () => {
+  const DecreaseItems = (id) => {
     let cnt = Increase
     if (Increase > 1 && Increase <= 5) {
       cnt = cnt - 1;
       setIncrease(cnt)
+      setTotal(totalp)
       dispatch(IncreaseItemFromCart(data?.Id, cnt));
     }
     else { return }
   }
-  
+
   return (
     <>
       <div className={styles.cart} >
@@ -51,9 +55,9 @@ const Cart = ({ data, handleDelete, setPrice }) => {
 
           <div className={styles.someCartbtn} >
             <div className={styles.Increasebtns} >
-              <button className={styles.Incbtn} onClick={DecreaseItems} >-</button>
+              <button className={styles.Incbtn} onClick={() => DecreaseItems(index)} >-</button>
               <span>{Increase}</span>
-              <button className={styles.Decbtn} onClick={IncreaseItems} >+</button>
+              <button className={styles.Decbtn} onClick={() => IncreaseItems()} >+</button>
             </div>
 
             <div className={styles.removebtn} >

@@ -28,7 +28,7 @@ const Products = () => {
                     <div className={styles.ItemsHeading} ><span>Products For You</span></div>
                     <div className={styles.items} >
                         {
-                            items.reverse()?.map((products, idx) => {
+                            items?.reverse()?.map((products, idx) => {
                                 return (
                                     <>
                                         {products?.Count <= 0 ? (" ") :
