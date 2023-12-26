@@ -1,6 +1,7 @@
 const express = require('express');
-const { maleCreateProducts,
-    femaleCreateProducts,
+const {
+    CreateProducts,
+    // femaleCreateProducts,
     getProducts,
     getProductsById,
     getQueryProducts
@@ -8,8 +9,7 @@ const { maleCreateProducts,
 const router = express.Router()
 
 // Product routes
-router.post('/product/Maleproduct', maleCreateProducts);
-router.post('/product/Femaleproduct', femaleCreateProducts);
+router.post('/createproduct', CreateProducts);
 router.get('/getproduct', getProducts);
 router.get('/getQueryproduct', getQueryProducts);
 router.get('/getproductbyId', getProductsById);

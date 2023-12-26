@@ -2,18 +2,7 @@ const { ObjectID } = require('mongodb');
 const Product = require('../models/productModel');
 
 // Create products for male
-const maleCreateProducts = async (req, res) => {
-  try {
-    const product = new Product(req.body);
-    await product.save();
-    res.json(product._id);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-// Create products for female
-const femaleCreateProducts = async (req, res) => {
+const CreateProducts = async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
@@ -67,8 +56,7 @@ const getProductsById = async (req, res) => {
 };
 
 module.exports = {
-  maleCreateProducts,
-  femaleCreateProducts,
+  CreateProducts,
   getProducts,
   getQueryProducts,
   getProductsById,
