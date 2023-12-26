@@ -10,7 +10,7 @@ const router = express.Router()
 // Product routes
 router.post('/createproduct', CreateProducts);
 router.get('/getproduct', getProducts);
-router.get('/getQueryproduct', getQueryProducts);
-router.get('/getproductbyId', getProductsById);
+router.get('/getQueryproduct/:q', getQueryProducts);
+router.get('/getproductbyId/:id', getProductsById);
 
 module.exports = router

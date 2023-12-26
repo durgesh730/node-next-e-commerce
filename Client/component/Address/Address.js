@@ -31,7 +31,6 @@ const Address = ({ setActive }) => {
       postalCode,
       country
     };
-    console.log('Full Address:', fullAddress);
     // Handle the address submission logic here
   };
 

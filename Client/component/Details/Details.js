@@ -20,7 +20,7 @@ const Details = ({ product }) => {
   const user = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
   const selector = useSelector(state => state.cart)
   const { loading, error, cart } = selector;
-
+   
   const handlecart = (id) => {
     if (user) {
       dispatch(AddtoCart(id))
@@ -37,31 +37,31 @@ const Details = ({ product }) => {
           <div className={styles.onlyImgs}>
             <div className={styles.Imgs} >
               <div className={styles.SmallImg} >
-                <Image className={styles.SmallSingle} src={product?.Images[0]} width={500} height={500} alt='img' />
-                <Image className={styles.SmallSingle} src={product?.Images[1]} width={500} height={500} alt='img' />
-                <Image className={styles.buttonImg} src={product?.Images[2]} width={500} height={500} alt='img' />
+                <Image className={styles.SmallSingle} src={product?.image[0]} width={500} height={500} alt='img' />
+                <Image className={styles.SmallSingle} src={product?.image[1]} width={500} height={500} alt='img' />
+                <Image className={styles.buttonImg} src={product?.image[2]} width={500} height={500} alt='img' />
               </div>
               <div className={styles.BigestImg} >
-                <Image src={product?.Images[0]} width={500} height={500} alt='img' />
+                <Image src={product?.image[0]} width={500} height={500} alt='img' />
               </div>
             </div>
 
             <div className={styles.Cartbtnboth} >
-              <button className={styles.crtbtn} onClick={() => handlecart(product.Id)} >ADD TO CART</button>
+              <button className={styles.crtbtn} onClick={() => handlecart(product._id)} >ADD TO CART</button>
               <button className={styles.buybtn} >BUY NOW</button>
             </div>
           </div>
 
           <div className={styles.SideDetails} >
-            <div className={styles.brandName} >{product?.Brand.toUpperCase()}</div>
+            <div className={styles.brandName} >{product?.brand.toUpperCase()}</div>
 
             <div className={styles.title} >
-              <span>{product?.Title}</span>
+              <span>{product?.title}</span>
             </div>
             <div className={styles.priceSpecial}> <span>Price</span></div>
             <div className={styles.exactPrice} >
-              <span>₹{product?.Price}</span>
-              <small className={styles.discoutdetails} >{product?.Discount} % off</small>
+              <span>₹{product?.price}</span>
+              <small className={styles.discoutdetails} >{product?.discount} % off</small>
             </div>
             <div className={styles.rating} >
               <span>3.8 <AiFillStar /> </span>

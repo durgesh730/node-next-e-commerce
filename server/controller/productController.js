@@ -1,12 +1,11 @@
-const { ObjectID } = require('mongodb');
-const Product = require('../models/productModel');
+const Product = require('../models/productModel')
 
-// Create products for male
+// Create products
 const CreateProducts = async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
-    res.json(product._id);
+    res.status(200).json(product);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -16,7 +15,7 @@ const CreateProducts = async (req, res) => {
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find({});
-    res.json(products);
+    res. status(200).json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -25,14 +24,12 @@ const getProducts = async (req, res) => {
 // Fetch Products According to male and female according to query
 const getQueryProducts = async (req, res) => {
   try {
-    const query = req.query.q;
-    if (!query) {
-      return res.status(400).json({ message: "Missing 'q' query parameter" });
-    }
+    const query = req.params.q;
+    if (!query) return res.status(400).json({ message: "Missing query parameter" });
 
     const filter = { gender: { $regex: query, $options: 'i' } };
     const results = await Product.find(filter);
-    res.json(results);
+    res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -41,15 +38,11 @@ const getQueryProducts = async (req, res) => {
 // Get products by ID
 const getProductsById = async (req, res) => {
   try {
-    const query = req.query.q;
-    if (!query) {
-      return res.status(400).json({ message: "Missing 'q' query parameter" });
-    }
+    const query = req.params.id;
+    if (!query) return res.status(400).json({ message: "Missing  query parameter" });
 
-    const id = ObjectID(query);
-    const filter = { _id: id };
-    const results = await Product.find(filter);
-    res.json(results);
+    const results = await Product.find({ _id: query });
+    res.status(200).json(results);
   } catch (err) {
     res.status(500).json({ message: 'Internal server error' });
   }

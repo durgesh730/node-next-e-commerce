@@ -46,8 +46,8 @@ export default function productReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                totalItems: calculateTotalItems(action.payload),
-                totalPrice: calculateTotalPrice(action.payload),
+                // totalItems: calculateTotalItems(action.payload),
+                // totalPrice: calculateTotalPrice(action.payload),
                 idItems: action.payload,
             };
 

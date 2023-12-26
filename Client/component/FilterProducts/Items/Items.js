@@ -5,25 +5,26 @@ import { useRouter } from 'next/router'
 
 const Items = ({ product }) => {
   const router = useRouter()
-   
+
   const navigateToAnotherPage = () => {
     router.push({
       pathname: '/details',
-      query: { data: product.Id},
+      query: { data: product._id },
     });
   }
+
 
   return (
     <>
       <div className={styles.items} >
 
         <div onClick={navigateToAnotherPage} className={styles.ItemsCard} >
-          <div className={styles.ItemImg} ><Image src={product?.Images[0]} width={500} height={500} alt='images' /></div>
+          <div className={styles.ItemImg} ><Image src={product?.image[0]} width={500} height={500} alt='images' /></div>
           <div className={styles.ImgDetails} >
-            <div>{product?.Title}</div>
+            <div>{product?.title}</div>
 
             <div className={styles.price} >
-              <span> ₹ {product?.Price} </span>
+              <span> ₹ {product?.price} </span>
               <small>onwards</small>
             </div>
 

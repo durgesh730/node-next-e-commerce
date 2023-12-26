@@ -24,18 +24,11 @@ const fetchProducts = (url, type, query) => (dispatch) => {
 };
 
 // Fetch all products
-export const fetchAllProducts = () => fetchProducts(`${url}/getproduct`, types.FETCH_PRODUCTS_SUCCESS);
+export const fetchAllProducts = () => fetchProducts(`${url}/product/getproduct`, types.FETCH_PRODUCTS_SUCCESS);
 
 // Fetch products by query
-export const fetchQueryProducts = (query) => fetchProducts(`${url}/getQueryproduct?q=${query}`, types.FETCH_QUERY_PRODUCTS_SUCCESS);
+export const fetchQueryProducts = (query) => fetchProducts(`${url}/product/getQueryproduct/${query}`, types.FETCH_QUERY_PRODUCTS_SUCCESS);
 
+export const fetchProductsById = (query) => fetchProducts(`${url}/product/getproductbyId/${query}`, types.FETCH_PRODUCTS_BY_ID_SUCCESS);
 // Fetch products by ID
-export const fetchProductsById = (query) => fetchProducts(`${url}/getproductbyId?q=${query}`, types.FETCH_PRODUCTS_BY_ID_SUCCESS);
 
-export const calculateTotalItems = (items) => {
-    return items?.reduce((total, item) => total + item.quantity, 0);
-};
-
-export const calculateTotalPrice = (items) => {
-    return items?.reduce((total, item) => total + item.price * item.quantity, 0);
-};

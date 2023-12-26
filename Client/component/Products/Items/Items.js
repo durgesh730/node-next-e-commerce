@@ -9,7 +9,7 @@ const Items = ({ product }) => {
   const navigateToAnotherPage = () => {
     router.push({
       pathname: '/filter',
-      query: { data:product?.Gender },
+      query: { data:product?.gender },
     });
   }
 
@@ -17,12 +17,12 @@ const Items = ({ product }) => {
     <>
       <div className={styles.items} >
         <div onClick={navigateToAnotherPage} className={styles.ItemsCard} >
-          <div className={styles.ItemImg} ><Image src={product?.Images[0]} width={500} height={500} alt='images' /></div>
+          <div className={styles.ItemImg} ><Image src={product?.image[0]} width={500} height={500} alt='images' /></div>
           <div className={styles.ImgDetails} >
-            <div>{product?.Title}</div>
+            <div>{product?.title}</div>
 
             <div className={styles.price} >
-              <span> ₹ {product?.Price} </span>
+              <span> ₹ {product?.price} </span>
               <small>onwards</small>
             </div>
 

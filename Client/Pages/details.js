@@ -1,3 +1,4 @@
+'use client'
 import Details from '@/component/Details/Details'
 import Footer from '@/component/Footer/Footer'
 import Comment from '@/component/Comment/Comment'
@@ -15,7 +16,9 @@ const details = () => {
   const { loading, error, idItems } = resData
 
   useEffect(() => {
-    dispatch(fetchProductsById(data))
+    if (data) {
+      dispatch(fetchProductsById(data))
+    }
   }, [data])
 
   return (

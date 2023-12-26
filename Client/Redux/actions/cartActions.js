@@ -64,7 +64,7 @@ export const DeletePruductsFromCart = (deleteData) => ({
 export function DeleteProductsCarts(id) {
     return (dispatch) => {
         dispatch(AddToCartBegin)
-        return axios.delete(`${url}/cart/deleteproducts?q=${id}`, {
+        return axios.delete(`${url}/cart/deleteproducts${id}`, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -86,7 +86,7 @@ export const IncreaseItem = (IncreaseItem) => ({
 export function IncreaseItemFromCart(id, totalItem) {
     return (dispatch) => {
         dispatch(AddToCartBegin)
-        return axios.put(`${url}/cart/updateproducts?q=${id}`, { totalItem }, {
+        return axios.put(`${url}/cart/updateproducts${id}`, { totalItem }, {
             headers: {
                 "Content-Type": "application/json"
             }
