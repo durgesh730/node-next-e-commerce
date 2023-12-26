@@ -1,7 +1,6 @@
 const express = require('express');
 const {
     CreateProducts,
-    // femaleCreateProducts,
     getProducts,
     getProductsById,
     getQueryProducts
