@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '@/Redux/actions/userActions';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import {useDataValidation} from '@/Customhooks/useDataValidation';
+import { useDataValidation } from '@/Customhooks/useDataValidation';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -13,12 +13,16 @@ const Register = () => {
   const [exist, setExist] = useState(false);
   const [passShow, setPassshow] = useState(false);
   const [cpassShow, setCPassshow] = useState(false);
-  const [logg, setLogg] = useState({ email: "", password: "", cpassword: "" })
+  const [logg, setLogg] = useState({
+    email: "",
+    password: "",
+    cpassword: ""
+  })
   const route = useRouter()
   const userRegister = useSelector(state => state.user);
   // get user data from response/redux
   const { userInfo, error } = userRegister;
-  
+
   // custom hook
   const { validateData } = useDataValidation()
 
@@ -32,19 +36,16 @@ const Register = () => {
   }
 
   useEffect(() => {
-    if (userInfo?.status === 201 && exist === true) {
-      localStorage.setItem("user", userInfo?._id);
+    if (!error) {
       localStorage.setItem("token", userInfo?.token);
-      toast.success("Registed successfully")
-      setExist(false)
-      if (userInfo?.user.addresses.length == 0) {
-        route.push(`/userdetails`)
-      } else {
-        route.push(`/`);
-      }
-    } else if (userInfo?.status === 409 && exist === true) {
-      toast.success("user already exist")
-      setExist(false)
+      toast.success(userInfo?.msg)
+      // if (userInfo?.user.addresses.length == 0) {
+      //   route.push(`/userdetails`)
+      // } else {
+      //   route.push(`/`);
+      // }
+    } else {
+      toast.success(error?.msg)
     }
   }, [userInfo])
 

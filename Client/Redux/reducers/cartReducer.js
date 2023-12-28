@@ -6,7 +6,6 @@ const initialState = {
     error: null,
     dataCart: [],
     deleteProduct: [],
-    IncreaseCnt: [],
 };
 
 export default function CartReducer(state = initialState, action) {
@@ -50,7 +49,7 @@ export default function CartReducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                IncreaseCnt: action.payload,
+                dataCart: action.payload,
             }
         default:
             return state;

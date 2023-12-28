@@ -38,23 +38,16 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if (userInfo?.status === 201 && exist === true) {
-      localStorage.setItem("user", userInfo?.user._id);
+    if (!error) {
       localStorage.setItem("token", userInfo?.token);
-      toast.success("Logged in successfully")
-      setExist(false)
-      if (userInfo?.user.addresses.length == 0) {
-        router.push(`/userdetails`)
-      } else {
-        router.push(`/`);
-      }
-    } else if (userInfo?.status === 404 && exist === true) {
-      toast.error("Email not Exist")
-      setExist(false)
-    }
-    else if (userInfo?.status === 401 && exist === true) {
-      toast.error("Password not correct")
-      setExist(false)
+      toast.success(userInfo?.msg)
+      // if (userInfo?.user.addresses.length == 0) {
+      //   route.push(`/userdetails`)
+      // } else {
+      //   route.push(`/`);
+      // }
+    } else {
+      toast.success(error?.msg)
     }
   }, [userInfo])
 

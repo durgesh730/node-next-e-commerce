@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const Total = ({ totalPrice }) => {
+const Total = ({ total, totalItem }) => {
   return (
     <>
       <div className={styles.total} >
@@ -20,28 +20,28 @@ const Total = ({ totalPrice }) => {
             <TableHead>
               <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0, paddingTop: "1rem" } }} >
                 <TableCell>Price</TableCell>
-                <TableCell>₹{ }</TableCell>
+                <TableCell>₹{total}</TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
               <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0, paddingTop: "1rem" } }}>
                 <TableCell component="th" scope="row">Delivery Charges</TableCell>
-                <TableCell>Fee</TableCell>
+                <TableCell>0%</TableCell>
               </TableRow>
             </TableBody>
 
             <TableBody>
               <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0, paddingTop: "1rem", paddingBottom: "1rem" } }}>
                 <TableCell component="th" scope="row">Total Item</TableCell>
-                <TableCell>{ }</TableCell>
+                <TableCell>{totalItem}</TableCell>
               </TableRow>
             </TableBody>
 
             <TableBody>
               <TableRow sx={{ '&:last-child td, &:last-child th': { borderTop: 1, borderColor: "#F1F3F6" } }}>
                 <TableCell className={styles.totalrupee} >Total</TableCell>
-                <TableCell className={styles.totalrupee} >₹{totalPrice}</TableCell>
+                <TableCell className={styles.totalrupee} >₹{total}</TableCell>
               </TableRow>
             </TableBody>
           </Table>

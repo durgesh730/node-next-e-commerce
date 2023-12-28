@@ -25,7 +25,7 @@ const Details = ({ product }) => {
     if (user) {
       dispatch(AddtoCart(id))
       toast.success('Added Successfully!')
-      router.push('/cart')
+      // router.push('/cart')
     }
   }
 

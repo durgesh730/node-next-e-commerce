@@ -2,7 +2,7 @@ const Cart = require('../models/cartModel');
 
 const createProductCart = async (req, res) => {
   try {
-    const userId = req.user.id; // Assuming you have middleware to extract the user ID
+    const userId = req.userId;
     const cart = new Cart({ ...req.body, userId, totalItem: 1 });
     const save = await cart.save();
     res.json(save);
@@ -13,17 +13,21 @@ const createProductCart = async (req, res) => {
 
 const getProductFromCart = async (req, res) => {
   try {
-    const userId = req.user.id; // Assuming you have middleware to extract the user ID
-    const cart = await Cart.find({ userId });
-    res.json(cart);
+    const userId = req.userId;
+    const cart = await Cart.find({ userId })
+      .populate('userId')
+      .populate('productId')
+      .exec();
+    res.status(200).json(cart);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
+
 const deleteProductFromCart = async (req, res) => {
   try {
-    const productId = req.query.q;
+    const productId = req.prams.q;
     if (!productId) {
       return res.status(400).json({ message: "Missing 'q' query parameter" });
     }
@@ -37,7 +41,7 @@ const deleteProductFromCart = async (req, res) => {
 
 const updateProductFromCart = async (req, res) => {
   try {
-    const productId = req.query.q;
+    const productId = req.params.q;
     if (!productId) {
       return res.status(400).json({ message: "Invalid query parameter 'q'" });
     }
@@ -46,16 +50,23 @@ const updateProductFromCart = async (req, res) => {
     const filter = { productId };
     const update = { $set: { totalItem } };
 
-    const result = await Cart.updateOne(filter, update);
-    if (result.matchedCount === 0) {
+    // Update the document and retrieve the updated data
+    const updatedCart = await Cart.findOneAndUpdate(filter, update, { new: true })
+    if (!updatedCart) {
       return res.status(404).json({ message: 'Product not found' });
     }
+    
+    const updatedData = await Cart.find({})
+      .populate('userId')
+      .populate('productId')
+      .exec();
 
-    res.status(200).json({ message: 'Document updated successfully' });
+    res.status(200).json({ message: 'Document updated successfully', updatedData });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
 
 module.exports = {
   createProductCart,

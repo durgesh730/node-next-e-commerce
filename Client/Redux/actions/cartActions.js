@@ -1,6 +1,6 @@
 import { url } from '@/host';
 import * as types from '../constants/cartConstant';
-import axios from 'axios'
+import axios from 'axios';
 
 export const AddToCartBegin = () => ({
     type: types.ADD_TO_CART_BEGIN
@@ -21,7 +21,7 @@ export function AddtoCart(productId) {
         dispatch(AddToCartBegin)
         return axios.post(`${url}/cart/createproducts`, { productId }, {
             headers: {
-                "Authorization": localStorage.getItem("token"),
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json"
             }
         })
@@ -42,7 +42,7 @@ export function FetchUsercart() {
         dispatch(AddToCartBegin)
         return axios.get(`${url}/cart/getproducts`, {
             headers: {
-                "Authorization": localStorage.getItem("token"),
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 "Content-Type": "application/json"
             }
         })
@@ -52,7 +52,6 @@ export function FetchUsercart() {
             .catch((error) => {
                 dispatch(AddToCartFailure(error))
             })
-
     }
 }
 
@@ -86,14 +85,13 @@ export const IncreaseItem = (IncreaseItem) => ({
 export function IncreaseItemFromCart(id, totalItem) {
     return (dispatch) => {
         dispatch(AddToCartBegin)
-        return axios.put(`${url}/cart/updateproducts${id}`, { totalItem }, {
+        return axios.put(`${url}/cart/updateproducts/${id}`, { totalItem }, {
             headers: {
                 "Content-Type": "application/json"
             }
         })
             .then((res) => {
-                console.log(res.data, "res dyady")
-                    - dispatch(IncreaseItem(res.data))
+                dispatch(IncreaseItem(res.data.updatedData))
             })
             .catch((error) => {
                 dispatch(AddToCartFailure(error))
