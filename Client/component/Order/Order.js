@@ -2,11 +2,7 @@ import styles from './Order.module.css'
 import Img from './Image/Img';
 import { Button, Divider, Typography } from '@mui/material';
 
-
-const Order = ({ data, setActive , sum}) => {
-
-  console.log(data, "comming data")
-
+const Order = ({ data, setActive}) => {
   return (
     <>
       <div className={styles.cart} >
