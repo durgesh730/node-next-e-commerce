@@ -10,11 +10,11 @@ const Login = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const [exist, setExist] = useState(false);
   const [login, setLogin] = useState({ email: "", password: "" })
   const [passShow, setPassshow] = useState(false);
 
   const userlogged = useSelector(state => state.user);
+
   // get user data from response/redux
   const { userInfo, error } = userlogged;
 
@@ -33,23 +33,34 @@ const Login = () => {
       toast.error("email is not valid")
     } else {
       dispatch(userlogin(login))
-      setExist(true);
+      if (!error && userInfo) {
+        localStorage.setItem("token", userInfo?.token);
+        toast.success(userInfo?.msg)
+        if (userInfo?.existingUser?.addresses?.length == 0) {
+          router.push(`/userdetails`)
+        } else {
+          router.push(`/`);
+        }
+      } 
+      // else {
+      //   toast.success(error?.msg)
+      // }
     }
   }
 
-  useEffect(() => {
-    if (!error) {
-      localStorage.setItem("token", userInfo?.token);
-      toast.success(userInfo?.msg)
-      // if (userInfo?.user.addresses.length == 0) {
-      //   route.push(`/userdetails`)
-      // } else {
-      //   route.push(`/`);
-      // }
-    } else {
-      toast.success(error?.msg)
-    }
-  }, [userInfo])
+  // useEffect(() => {
+  //   if (!error) {
+  //     localStorage.setItem("token", userInfo?.token);
+  //     toast.success(userInfo?.msg)
+  //     if (userInfo?.existingUser.addresses.length == 0) {
+  //       router.push(`/userdetails`)
+  //     } else {
+  //       router.push(`/`);
+  //     }
+  //   } else {
+  //     toast.success(error?.msg)
+  //   }
+  // }, [userInfo, error])
 
   return (
     <>

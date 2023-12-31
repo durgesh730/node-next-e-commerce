@@ -22,6 +22,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UpdateUserAddress, fetchUserDataByToken } from '@/Redux/actions/userActions';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
+import { styled } from '@mui/material/styles';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Avatar from '@mui/material/Avatar';
+// import pic from '../image/download.png'
+import CircularProgress from '@mui/material/CircularProgress';
+import Image from 'next/image';
+
 const steps = [
     {
         icon: 'tabler:home',
@@ -35,7 +42,6 @@ const steps = [
     }
 ];
 
-
 const userdetails = () => {
     const [value, setValue] = useState('option1');
     const [activeStep, setActiveStep] = useState(0);
@@ -43,7 +49,10 @@ const userdetails = () => {
     const UData = useSelector(state => state.user)
     const { error, isloading, userData } = UData;
     const router = useRouter()
+    // const [pic, setPic] = useState([])
+    const [picLoading, setPicLoading] = useState(false);
 
+    // console.log(pic, "pic duresgsh")
     const [formData, setFormData] = useState({
         firstName: userData.firstName,
         lastName: userData.lastName,
@@ -55,8 +64,11 @@ const userdetails = () => {
         state: '',
         country: '',
         zipCode: '',
-        city: ''
+        city: '',
+        pic: userData.pic
     });
+
+    console.log(userData.pic, "usr")
 
     const address = {
         state: formData.state,
@@ -107,6 +119,7 @@ const userdetails = () => {
             firstName: userData.firstName,
             lastName: userData.lastName,
             phone: userData.phone,
+            pic: userData.pic
         }));
     }, [userData])
 
@@ -114,52 +127,128 @@ const userdetails = () => {
         dispatch(fetchUserDataByToken());
     }, []);
 
+    const VisuallyHiddenInput = styled('input')({
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        height: 1,
+        overflow: 'hidden',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        whiteSpace: 'nowrap',
+        width: 1,
+    });
+
+    const postDetails = (pics) => {
+        setPicLoading(true);
+        if (pics === undefined) {
+            toast.error({
+                title: "Please Select an Image!",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            return;
+        }
+        if (pics.type === "image/jpeg" || pics.type === "image/png") {
+            const data = new FormData();
+            data.append("file", pics);
+            data.append("upload_preset", "chat-app");
+            data.append("cloud_name", "durgesh2022");
+            fetch("https://api.cloudinary.com/v1_1/durgesh2022/image/upload", {
+                method: "post",
+                body: data,
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    setFormData((prev) => ({
+                        ...prev,
+                        pic: data.url.toString()
+                    }))
+                    setPicLoading(false);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setPicLoading(false);
+                });
+        } else {
+            toast.success({
+                title: "Please Select an Image!",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom",
+            });
+            setPicLoading(false);
+            return;
+        }
+    };
+
     const getStepContent = (step) => {
         switch (step) {
             case 0:
                 return (
-                    <Grid sx={{ paddingTop: "3rem", paddingBottom: "2rem" }} container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                size="small"
-                                fullWidth
-                                label="First Name"
-                                name="firstName"
-                                value={formData.firstName}
-                                onChange={handleChange}
-                            />
+                    <>
+                        <Box sx={{ marginTop: "30px", display: "flex", justifyContent: "start", alignItems: "center", gap: "20px" }} >
+                            <Avatar sx={{ width: 100, height: 100 }}><Image width={200} height={200} src={formData.pic} alt='image avtar'></Image></Avatar>
+                            <Grid>
+                                {!picLoading ?
+                                    <Button size='medium' component="label" variant="contained" startIcon={<CloudUploadIcon />}> Upload Image
+                                        <VisuallyHiddenInput
+                                            type='file'
+                                            accept="image/*"
+                                            onChange={(e) => postDetails(e.target.files[0])}
+                                        />
+                                    </Button> :
+                                    <CircularProgress />
+                                }
+                            </Grid>
+                        </Box>
+
+                        <Grid sx={{ paddingTop: "1rem", paddingBottom: "2rem" }} container spacing={2}>
+                            <Grid item xs={12} sm={6}>
+                                <label>First Name</label>
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <label>Last Name</label>
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    label="Phone number"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    size="small"
+                                    fullWidth
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                />
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                size="small"
-                                fullWidth
-                                label="Last Name"
-                                name="lastName"
-                                value={formData.lastName}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                size="small"
-                                fullWidth
-                                label="Phone number"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                size="small"
-                                fullWidth
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                            />
-                        </Grid>
-                    </Grid>
+                    </>
                 );
             case 1:
                 return (

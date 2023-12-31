@@ -63,7 +63,7 @@ export const fetchUserDataByToken = () => (dispatch) => {
   axios
     .get(`${url}/user/getuserData/`, {
       headers: {
-        Authorization: localStorage.getItem('token'),
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
         'Content-Type': 'application/json',
       },
     })
@@ -86,7 +86,7 @@ export const UpdateUserAddress = (data) => (dispatch) => {
   axios
     .put(`${url}//user/AddAddress/`, data, {
       headers: {
-        Authorization: localStorage.getItem('token'),
+        "Authorization": `Bearer ${localStorage.getItem("token")}`,
         'Content-Type': "application/json",
       },
     }).then((res) => {

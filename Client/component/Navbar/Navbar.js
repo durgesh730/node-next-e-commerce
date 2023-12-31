@@ -1,27 +1,30 @@
-import styles from './Navbar.module.css'
-import Seachbar from './Search/Seachbar'
+import { useState, useEffect, useRef } from 'react';
+import Link from 'next/link';
 import { BsCart3 } from 'react-icons/bs';
 import { PiUserLight } from 'react-icons/pi';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-import * as React from 'react';
+import { useRouter } from 'next/router';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
+
+import styles from './Navbar.module.css';
+import Seachbar from './Search/Seachbar';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/router';
 
 const Navbar = () => {
-  const user = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
-  const [hidden, setHidden] = useState(false);
-  const route = useRouter()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const route = useRouter();
 
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+
+  useEffect(() => {
+    const userToken = localStorage.getItem('token');
+    setIsLoggedIn(!!userToken);
+  }, []);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -35,11 +38,12 @@ const Navbar = () => {
   };
 
   const handleLogout = (e) => {
-    handleClose(e);
     localStorage.clear();
+    e.preventDefault();
+    handleClose(e);
     toast.success('Logout Successfully')
-    route.push('/login')
-  }
+    route.push('/login');
+  };
 
   function handleListKeyDown(event) {
     if (event.key === 'Tab') {
@@ -50,44 +54,32 @@ const Navbar = () => {
     }
   }
 
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
-
-  useEffect(() => {
-    if (user) {
-      setHidden(true);
-    } else {
-      setHidden(false)
-    }
-  }, [user])
-
   return (
     <>
-      <div className={styles.english} >
-        <div className={styles.offertext} >
-          <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!ShopNow</span> </div>
-        <div className={styles.lang} > <span>English</span></div>
+      <div className={styles.english}>
+        <div className={styles.offertext}>
+          <span>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! Shop Now</span>
+        </div>
+        <div className={styles.lang}>
+          <span>English</span>
+        </div>
       </div>
 
-      <div className={styles.topnav} >
-        <Link href={'/'}><span className={styles.logo} >Durgesh</span><br /> <small className={styles.alpha} >Alpha e-commerces</small> </Link>
-        <div> <Seachbar /> </div>
-        <div className={styles.RegSigCart} >
-          {!hidden ?
+      <div className={styles.topnav}>
+        <Link href={'/'}>
+          <span className={styles.logo}>Durgesh</span>
+          <br />
+          <small className={styles.alpha}>Alpha e-commerces</small>
+        </Link>
+        <div>
+          <Seachbar />
+        </div>
+        <div className={styles.RegSigCart}>
+          {isLoggedIn ? (
             <>
-              <Link href={'/signup'}>Register</Link>
-              <Link href={'/login'} className={styles.navSign} ><PiUserLight /> Sign in</Link>
-            </>
-            :
-            <>
-              <Link href={'/cart'} className={styles.navcart} ><BsCart3 />  Cart </Link>
+              <Link href={'/cart'} className={styles.navcart}>
+                <BsCart3 /> Cart{' '}
+              </Link>
               <span
                 ref={anchorRef}
                 id="composition-button"
@@ -95,7 +87,8 @@ const Navbar = () => {
                 aria-expanded={open ? 'true' : undefined}
                 aria-haspopup="true"
                 onClick={handleToggle}
-                style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", gap: "5px", cursor: "pointer" }} >
+                className={styles.accountButton}
+              >
                 <PiUserLight />
                 Account
               </span>
@@ -134,11 +127,18 @@ const Navbar = () => {
                 )}
               </Popper>
             </>
-          }
+          ) : (
+            <>
+              <Link href={'/signup'}>Register</Link>
+              <Link href={'/login'} className={styles.navSign}>
+                <PiUserLight /> Sign in
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

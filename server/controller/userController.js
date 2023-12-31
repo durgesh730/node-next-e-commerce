@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         const token = generateToken(savedUser._id)
         res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
 
-        res.status(201).json({ token, msg: 'User successfully registered' });
+        res.status(201).json({ savedUser, token, msg: 'User successfully registered' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -36,7 +36,7 @@ const loginUser = async (req, res) => {
         const token = generateToken(existingUser._id);
         res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
 
-        res.status(201).json({ token, msg: 'User successfully Logged In' });
+        res.status(201).json({ existingUser,token, msg: 'User successfully Logged In' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
