@@ -30,9 +30,7 @@ const Order = ({ data, setActive}) => {
               </div>
               <Divider />
             </>
-          )
-        })
-        }
+          )})}
         <div className={styles.someCartbtn} >
           <Button variant='contained' onClick={()=>{setActive(3)}} >Continue</Button>
         </div>
