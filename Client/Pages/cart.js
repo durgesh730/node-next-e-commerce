@@ -92,7 +92,7 @@ const CartComponent = () => {
                             )}
 
                             {active === 1 && <Address setActive={setActive} />}
-                            {active === 2 && <Order data={products} setActive={setActive} />}
+                            {active === 2 && <Order data={dataCart} setActive={setActive} sum={sum} />}
                             {active === 3 && <PaymentOpt />}
 
                             <div className={styles.sidetotalCom}>

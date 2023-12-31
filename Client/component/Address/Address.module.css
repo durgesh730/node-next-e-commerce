@@ -41,3 +41,11 @@
 .Deliverybtn button:hover {
     background-color: #E07575;
 }
+
+.savebtn{
+    float: left;
+    background-color: #E07575;
+    font-size: 1rem;
+    padding: .4rem 3rem;
+    color: white;
+}

@@ -3,28 +3,30 @@ import Img from './Image/Img';
 import { Button, Divider, Typography } from '@mui/material';
 
 
-const Order = ({ data, setActive }) => {
-  const pro = data
+const Order = ({ data, setActive , sum}) => {
+
+  console.log(data, "comming data")
+
   return (
     <>
       <div className={styles.cart} >
         <div className={styles.addresshead}  >
           <Typography sx={{ fontWeight: 600 }} > Details</Typography>
         </div>
-        {pro?.map((item, indx) => {
+        {data?.map((item, indx) => {
           return (
             <>
               <div key={indx} className={styles.CartItems} >
                 <div className={styles.productanddetails} >
                   <div className={styles.cartImg} >
-                    <Img images={item.Images} />
+                    <Img images={item.productId.image} />
                   </div>
 
                   <div className={styles.ItemDetalis} >
-                    <div className={styles.title} >{item?.Title}</div>
+                    <div className={styles.title} >{item?.productId.title}</div>
                     <div className={styles.sizecart} >Size: M </div>
                     <div className={styles.exactPrice} >
-                      <span> ₹{item?.Price}</span>
+                      <span> ₹{item?.productId.price}</span>
                       <small className={styles.discoutdetails} >20% off</small>
                     </div>
                   </div>

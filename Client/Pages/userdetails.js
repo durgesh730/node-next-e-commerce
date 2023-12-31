@@ -49,10 +49,7 @@ const userdetails = () => {
     const UData = useSelector(state => state.user)
     const { error, isloading, userData } = UData;
     const router = useRouter()
-    // const [pic, setPic] = useState([])
     const [picLoading, setPicLoading] = useState(false);
-
-    // console.log(pic, "pic duresgsh")
     const [formData, setFormData] = useState({
         firstName: userData.firstName,
         lastName: userData.lastName,
@@ -67,8 +64,6 @@ const userdetails = () => {
         city: '',
         pic: userData.pic
     });
-
-    console.log(userData.pic, "usr")
 
     const address = {
         state: formData.state,

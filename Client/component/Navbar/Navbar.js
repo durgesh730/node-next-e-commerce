@@ -43,6 +43,7 @@ const Navbar = () => {
     handleClose(e);
     toast.success('Logout Successfully')
     route.push('/login');
+    window.location.reload()
   };
 
   function handleListKeyDown(event) {

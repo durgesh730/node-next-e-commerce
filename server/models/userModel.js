@@ -30,7 +30,7 @@ const UserSchema = new Schema({
         required: false,
         default:"https://img.freepik.com/free-vector/man-with-mustache_1308-83591.jpg?w=740&t=st=1704008588~exp=1704009188~hmac=c12badd95f4d66c303cfb6fa84786e1f7e6a37b5c911578f3ab933f890b8a4ad"
     },
-    addresses: [{
+    address: [{
         street: {
             type: String,
             required: false

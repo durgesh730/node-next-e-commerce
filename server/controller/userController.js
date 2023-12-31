@@ -36,7 +36,7 @@ const loginUser = async (req, res) => {
         const token = generateToken(existingUser._id);
         res.cookie('token', token, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000), httpOnly: true });
 
-        res.status(201).json({ existingUser,token, msg: 'User successfully Logged In' });
+        res.status(201).json({ existingUser, token, msg: 'User successfully Logged In' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -58,17 +58,15 @@ const getUser = async (req, res) => {
 const addAddress = async (req, res) => {
     try {
         const userId = req.userId;
-        const address = req.body.address;
-
         const updatedUser = await User.findByIdAndUpdate(
             userId,
-            { $push: { addresses: address } },
+            { $push: { address: req.body } },
             { new: true }
         );
 
         if (!updatedUser) return res.status(404).json({ message: 'User not found', status: 404 });
 
-        res.status(200).json({ message: 'Document updated successfully' });
+        res.status(200).json({ message: 'Document updated successfully', updatedUser });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

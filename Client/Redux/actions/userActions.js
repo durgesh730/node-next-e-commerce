@@ -84,12 +84,13 @@ const UpdateUserAddressFailure = (error) => ({ type: types.UPDATE_USER_DATA_FAIL
 export const UpdateUserAddress = (data) => (dispatch) => {
   dispatch(UpdateUserAddressRequest());
   axios
-    .put(`${url}//user/AddAddress/`, data, {
+    .put(`${url}/user/AddAddress/`, data, {
       headers: {
         "Authorization": `Bearer ${localStorage.getItem("token")}`,
         'Content-Type': "application/json",
       },
     }).then((res) => {
+      console.log(res, "error of updating user data")
       dispatch(UpdateUserAddressSuccess(res.data))
     })
     .catch((err) => {
